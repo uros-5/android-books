@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Knjizara</string>
+    <string name="nesto">Nesto</string>
+    <string name="katNajp">Najpopularnije</string>
+    <string name="katBesp">Besplatne</string>
+    <string name="katHro">HRONOLOSKA LISTA</string>
+</resources>

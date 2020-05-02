@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp">
+
+        <LinearLayout
+            android:id="@+id/layout_za_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/aktulna_knjiga_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/border_for_first_photo">
+
+                <ImageView
+                    android:id="@+id/aktuelna_knjiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/nesto"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/prvaslika" />
+
+                <TextView
+                    android:id="@+id/kategorija1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="@string/katNajp"
+                    android:textSize="20sp">
+                </TextView>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/najpopularnijeKnjige"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/border_for_first_photo">
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border_za_najpopularnije"
+                    android:layout_margin="7dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="@color/katNajpBoja">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <ImageView
+                                    android:id="@+id/knjiga1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="250dp"
+                                    android:scaleType="fitStart"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/popularnaknjiga1"
+                                    android:contentDescription="@string/nesto"
+                                    android:background="@drawable/border_za_najpopularnije">
+                                </ImageView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <ImageView
+                                    android:id="@+id/knjiga2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="250dp"
+                                    android:scaleType="fitStart"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/popularnaknjiga1"
+                                    android:contentDescription="@string/nesto"
+                                    android:background="@drawable/border_za_najpopularnije">
+                                </ImageView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <ImageView
+                                    android:id="@+id/knjiga3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="250dp"
+                                    android:scaleType="fitStart"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/popularnaknjiga1"
+                                    android:contentDescription="@string/nesto"
+                                    android:background="@drawable/border_za_najpopularnije">
+                                </ImageView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+                <TextView
+                    android:id="@+id/kategorija3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="@string/katBesp"
+                    android:textSize="20sp">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border_za_najpopularnije"
+                    android:layout_margin="7dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="@color/katNajpBoja">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <ImageView
+                                    android:id="@+id/knjigaa1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="250dp"
+                                    android:scaleType="fitStart"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/popularnaknjiga1"
+                                    android:contentDescription="@string/nesto"
+                                    android:background="@drawable/border_za_najpopularnije">
+                                </ImageView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <ImageView
+                                    android:id="@+id/knjigaa2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="250dp"
+                                    android:scaleType="fitStart"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/popularnaknjiga1"
+                                    android:contentDescription="@string/nesto"
+                                    android:background="@drawable/border_za_najpopularnije">
+                                </ImageView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <ImageView
+                                    android:id="@+id/knjigaa3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="250dp"
+                                    android:scaleType="fitStart"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/popularnaknjiga1"
+                                    android:contentDescription="@string/nesto"
+                                    android:background="@drawable/border_za_najpopularnije">
+                                </ImageView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </HorizontalScrollView>
+
+                </ScrollView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aktulna_knjiga2_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/top_border">
+
+                <ImageView
+                    android:id="@+id/aktuelna_knjiga2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/nesto"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/prvaslika" />
+
+                <TextView
+                    android:id="@+id/kategorija4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="@string/katHro"
+                    android:textSize="20sp">
+                </TextView>
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout >
