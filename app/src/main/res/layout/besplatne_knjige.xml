@@ -5,22 +5,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/border_za_kategoriju"
-        android:layout_margin="7dp">
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/besplatneKnjige0"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/katNajpBoja">
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/besplatneKnjige0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/katNajpBoja">
+
 
 <!--                <include-->
 <!--                    layout="@layout/knjiga"-->
@@ -32,11 +26,7 @@
 <!--                <include-->
 <!--                    layout="@layout/knjiga"/>-->
 
-            </LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
 
-
-        </HorizontalScrollView>
-
-    </ScrollView>
 
 </LinearLayout>

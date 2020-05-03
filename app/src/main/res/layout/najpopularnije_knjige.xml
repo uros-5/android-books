@@ -6,38 +6,18 @@
     android:orientation="vertical"
     android:background="@drawable/border_for_first_photo">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/border_za_kategoriju"
-        android:layout_margin="7dp">
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    <androidx.recyclerview.widget.RecyclerView
 
-            <LinearLayout
-                android:id="@+id/najpopularnijeKnjige0"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/katNajpBoja">
-
-<!--                <include-->
-<!--                    layout="@layout/knjiga"/>-->
-
-<!--                <include-->
-<!--                    layout="@layout/knjiga"/>-->
-
-<!--                <include-->
-<!--                    layout="@layout/knjiga"/>-->
-
-            </LinearLayout>
+        android:id="@+id/najpopularnijeKnjige0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/katNajpBoja">
 
 
-        </HorizontalScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
-    </ScrollView>
 
     <TextView
         android:id="@+id/kategorija3"

@@ -19,22 +19,21 @@
     </ImageView>
 
     <TextView
+
         android:id="@+id/naslov"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Naslov"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/autor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Autor"
+
         android:textStyle="normal"/>
     <TextView
         android:id="@+id/cena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:text="500rsd"/>
+        android:layout_gravity="bottom|right" />
 
 </LinearLayout>
