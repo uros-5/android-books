@@ -1,7 +1,6 @@
 package com.example.knjizara;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,27 +16,42 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     ArrayList<Knjiga> niz0 = new ArrayList<>();
-    ArrayList<Knjiga> niz1 = new ArrayList<>();
     private static final String TAG = "RecyclerViewAdapter";
 
-    public RecyclerViewAdapter(Context context, ArrayList<Knjiga> niz0, ArrayList<Knjiga> niz1) {
+    public RecyclerViewAdapter(Context context, ArrayList<Knjiga> niz0) {
         this.niz0 = niz0;
-        this.niz1 = niz1;
 
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.knjiga2,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.knjiga_top_level,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.naslov.setText(niz0.get(position).getNaslov());
+
+        String s = niz0.get(position).getNaslov();
+        if(s.length()>15) {
+            StringBuilder rad = new StringBuilder();
+            for (int i=0;i<15;i++) {
+                rad.append(s.charAt(i));
+            }
+            rad.append("...");
+            s = rad.toString();
+
+        }
+
+        String s2 = niz0.get(position).getCena();
+        if(!s2.startsWith("Bespl")) {
+            s2+="RSD";
+        }
+
+        holder.naslov.setText(s);
         holder.autor.setText(niz0.get(position).getAutor());
-        holder.cena.setText(niz0.get(position).getCena());
+        holder.cena.setText(s2);
 
         holder.slika.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 20;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -35,7 +35,7 @@ public class KnjigeAdapter extends ArrayAdapter<Knjiga> {
 
         System.out.println("NASLOV::"+naslov);
 
-        Knjiga knjga = new Knjiga(naslov,autor,cena);
+        Knjiga knjiga = new Knjiga(naslov,autor,cena);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource,parent,false);
 

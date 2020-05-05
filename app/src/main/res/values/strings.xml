@@ -4,4 +4,11 @@
     <string name="katNajp">Najpopularnije</string>
     <string name="katBesp">Besplatne</string>
     <string name="katHro">HRONOLOSKA LISTA</string>
+    <string name="naslov">Naslov</string>
+    <string name="autor">Autor</string>
+    <string name="isbn">ISBN</string>
+    <string name="kategorija">Kategorija</string>
+    <string name="cena">Cena knjige:</string>
+    <string name="korpaAdd">Dodaj u korpu</string>
+    <string name="izdavac">IZDAVAC:</string>
 </resources>

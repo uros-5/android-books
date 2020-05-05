@@ -65,20 +65,23 @@ public class MainActivity extends AppCompatActivity {
     public void citanje() {
 
         try {
-            String[][] temp0 = (String[][]) (this.in.readObject());
-            String[][] temp1 = (String[][]) (this.in.readObject());
+            System.out.println("POCETAK ADD");
+            ArrayList<Knjiga> temp0 = (ArrayList<Knjiga>) (this.in.readObject());
+            ArrayList<Knjiga> temp2 = (ArrayList<Knjiga>) (this.in.readObject());
+            System.out.println("DODATO.");
+//            String[][] temp1 = (String[][]) (this.in.readObject());
 
-            for (int i = 0; i < temp0.length; i++) {
-
-                Knjiga knjiga = new Knjiga(temp0[i][0], temp0[i][1], temp0[i][2]);
+            for (int i = 0; i < temp0.size(); i++) {
+                Knjiga knjiga = (Knjiga) temp0.get(i);
                 niz0.add(knjiga);
             }
-            for (int i = 0; i < temp1.length; i++) {
-                Knjiga knjiga = new Knjiga(temp1[i][0], temp1[i][1], temp1[i][2]);
+            for (int i = 0; i < temp2.size(); i++) {
+                Knjiga knjiga = (Knjiga) temp2.get(i);
                 niz1.add(knjiga);
             }
             temp0 = null;
-            temp1 = null;
+            temp2 = null;
+
 
 
         } catch (Exception e) {
@@ -97,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
             RecyclerView recyclerView = findViewById(R.id.najpopularnijeKnjige0);
 
             recyclerView.setLayoutManager(layoutManager);
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,niz0,niz1);
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,niz0);
             recyclerView.setAdapter(adapter);
         }
         else if (kat == "besplatne") {
 
             RecyclerView recyclerView = findViewById(R.id.besplatneKnjige0);
             recyclerView.setLayoutManager(layoutManager);
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,niz0,niz1);
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,niz1);
             recyclerView.setAdapter(adapter);
         }
 
