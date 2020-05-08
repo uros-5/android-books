@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="?attr/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:theme="@style/AppTheme"
+    android:layoutDirection="ltr">
+
+    <LinearLayout
+        android:background="#565d5b"
+        android:padding="8dp"
+        android:layoutDirection="rtl"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:textSize="13sp"
+            android:textColor="#66B1B1B1"
+            android:layout_gravity="center"
+            android:text="@string/knjizara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_account_balance_black_48dp">
+
+        </ImageView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="8dp"
+        android:layoutDirection="rtl"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="13sp"
+            android:textColor="#66B1B1B1"
+            android:layout_gravity="center"
+            android:text="@string/moje_knjige"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/novi_knigoteka">
+
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="8dp"
+        android:layoutDirection="rtl"
+        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/kolica">
+
+        </ImageView>
+    </LinearLayout>
+
+
+
+
+</androidx.appcompat.widget.Toolbar>

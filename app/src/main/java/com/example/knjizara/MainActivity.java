@@ -1,27 +1,20 @@
 package com.example.knjizara;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-
-import static android.view.View.MeasureSpec.makeMeasureSpec;
 
 public class MainActivity extends AppCompatActivity {
     ObjectInputStream in;
@@ -32,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_glavni);
+        setSupportActionBar(toolbar);
 
         this.otvoriZaCitanje();
         this.citanje();
@@ -46,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_top_level, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
 
     public void otvoriZaCitanje() {

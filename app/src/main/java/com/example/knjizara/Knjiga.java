@@ -17,6 +17,7 @@ public class Knjiga  implements Serializable{
     String autor;
     String izdavac;
 
+
     public Knjiga(String isbn, String strana, String godinaIzdanja, String cena, String naslov, String kategorija, String autor, String izdavac) {
         this.isbn = isbn;
         this.strana = strana;
@@ -52,4 +53,20 @@ public class Knjiga  implements Serializable{
     public String getCena() {
         return cena;
     }
+
+
+
+//    public String getStrana() { return strana; }
+//
+//    public String getGodinaIzdanja() {
+//        return godinaIzdanja;
+//    }
+//
+//    public String getKategorija() {
+//        return kategorija;
+//    }
+//
+//    public String getIzdavac() {
+//        return izdavac;
+//    }
 }

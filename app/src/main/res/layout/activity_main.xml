@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/topLevelActivity">
+
+    <include
+        layout="@layout/toolbar_glavni"
+        android:id="@+id/toolbar_glavni">
+
+    </include>
 
 
     <ScrollView

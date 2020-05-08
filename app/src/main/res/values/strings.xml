@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Knjizara</string>
+    <string name="app_name">KnjizaraTest</string>
     <string name="nesto">Nesto</string>
     <string name="katNajp">Najpopularnije</string>
     <string name="katBesp">Besplatne</string>
@@ -11,4 +11,8 @@
     <string name="cena">Cena knjige:</string>
     <string name="korpaAdd">Dodaj u korpu</string>
     <string name="izdavac">IZDAVAC:</string>
+    <string name="knjiga">Knjiga - </string>
+    <string name="knjizara">KNJIZARA</string>
+    <string name="moje_knjige">MOJE KNJIGE</string>
+    <string name="nista" />
 </resources>

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="15dp"
-    android:layout_margin="3dp"
+    android:layout_margin="12dp"
     android:background="@drawable/border_za_knjige">
 
     <androidx.cardview.widget.CardView
@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/slika"
                 android:layout_width="wrap_content"
-                android:layout_height="250dp"
+                android:layout_height="225dp"
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true"
                 android:src="@drawable/popularnaknjiga1"
@@ -31,11 +31,12 @@
             </ImageView>
 
             <TextView
+                android:singleLine="true"
                 android:text="nesto"
                 android:id="@+id/naslov"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"/>
             <TextView
@@ -51,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right" />
+
 
         </LinearLayout>
 
