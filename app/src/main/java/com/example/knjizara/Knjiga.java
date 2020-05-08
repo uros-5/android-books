@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @author Uros
  */
 public class Knjiga  implements Serializable{
+    static final long serialVersionUID =-1868148438490984265L;
     String isbn;
     String strana;
     String godinaIzdanja;
@@ -42,16 +43,56 @@ public class Knjiga  implements Serializable{
     }
 
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getStrana() {
+        return strana;
+    }
+
+    public String getGodinaIzdanja() {
+        return godinaIzdanja;
+    }
+
+    public String getCena() {
+        return cena;
+    }
+
     public String getNaslov() {
         return naslov;
+    }
+
+    public String getKategorija() {
+        return kategorija;
     }
 
     public String getAutor() {
         return autor;
     }
 
-    public String getCena() {
-        return cena;
+    public String getIzdavac() {
+        return izdavac;
+    }
+
+    public void setCena(String cena) {
+        this.cena = cena;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Knjiga) {
+
+            if(o.toString().equals(toString())) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.Menu;
@@ -17,16 +18,22 @@ public class KnjigaDetail  extends AppCompatActivity {
 
     public static final String EXTRA_ID = "knjigaID";
 
+    public Knjiga knjiga;
+
+    public Korpa korpa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.knjiga_detail);
 
+        korpa = new Korpa(KnjigaDetail.this);
 
 
 
 
         Knjiga knjiga = (Knjiga)getIntent().getExtras().get(EXTRA_ID);
+        this.knjiga = knjiga;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_knjiga);
         setSupportActionBar(toolbar);
@@ -37,7 +44,7 @@ public class KnjigaDetail  extends AppCompatActivity {
 
         try {
             String naslov = getSupportActionBar().getTitle().toString();
-            getSupportActionBar().setTitle(naslov + " "+knjiga.naslov);
+            getSupportActionBar().setTitle(naslov + " "+knjiga.getNaslov());
 
         } catch (Exception e) {
 
@@ -52,14 +59,14 @@ public class KnjigaDetail  extends AppCompatActivity {
         autorView.setText(knjiga.getAutor());
 
         Button kategorijaView = (Button) findViewById(R.id.kategorijaKnjige);
-        kategorijaView.setText(knjiga.kategorija);
+        kategorijaView.setText(knjiga.getKategorija());
 
         TextView cenaView = (TextView) findViewById(R.id.cenaKnjige);
         cenaView.setText("Cena knjige: "+knjiga.getCena());
 
 
         TextView izdavacView = (TextView) findViewById(R.id.textView4);
-        izdavacView.setText("IZDAVAC: "+knjiga.izdavac);
+        izdavacView.setText("IZDAVAC: "+knjiga.getIzdavac());
 
 
     }
@@ -81,5 +88,12 @@ public class KnjigaDetail  extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void dodajUKorpu(View view) {
+
+        System.out.println("KNJIGA: "+knjiga);
+        korpa.dodajKnjigu(knjiga);
+
     }
 }

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:theme="@style/AppTheme"
-    android:layoutDirection="ltr">
+    android:layoutDirection="ltr"
+    android:contentInsetStart="0dp"
+    android:contentInsetLeft="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp">
 
     <LinearLayout
-        android:background="#565d5b"
+        android:id="@+id/homeLayoutTopLevel"
         android:padding="8dp"
         android:layoutDirection="rtl"
         android:layout_weight="1"
@@ -37,11 +42,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/mojeKnjigeLayoutTopLevel"
         android:padding="8dp"
         android:layoutDirection="rtl"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:orientation="horizontal">
 
         <TextView
@@ -64,6 +70,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/kolicaLayoutTopLevel"
         android:padding="8dp"
         android:layoutDirection="rtl"
         android:layout_weight="2"

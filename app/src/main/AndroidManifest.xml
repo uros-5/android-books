@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity"
+        <activity android:name=".KorpaActivity" android:label="@string/nista" ></activity>
+        <activity android:name=".MojeKnjigeActivity" android:label="@string/nista" />
+        <activity
+            android:name=".MainActivity"
             android:label="@string/nista">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,16 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".KnjigaDetail"
+        <activity
+            android:name=".KnjigaDetail"
             android:label="@string/knjiga"
             android:parentActivityName=".MainActivity">
             <intent-filter>
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
