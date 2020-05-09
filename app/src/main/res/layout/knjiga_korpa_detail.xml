@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutKorpa"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="15dp"
+    android:background="@drawable/border_for_knjiga_korpa">
+
+
+
+    <ImageView
+        android:id="@+id/slikaKorpa"
+        android:layout_width="wrap_content"
+        android:layout_height="225dp"
+        android:layout_marginTop="18dp"
+        android:adjustViewBounds="true"
+        android:minLines="2"
+        android:scaleType="fitStart"
+        android:src="@drawable/popularnaknjiga1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/nesto"></ImageView>
+
+    <TextView
+        android:id="@+id/naslovKorpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/naslov"
+        android:textSize="20sp"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintStart_toEndOf="@+id/slikaKorpa"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cenaKorpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="72dp"
+        android:text="600 rsd."
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@+id/slikaKorpa"
+        app:layout_constraintTop_toBottomOf="@+id/naslovKorpa" />
+
+    <Button
+        android:id="@+id/brisanjeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="56dp"
+        android:onClick="obrisiIzKorpe"
+        android:text="@string/obrisi"
+        app:layout_constraintStart_toEndOf="@+id/slikaKorpa"
+        app:layout_constraintTop_toBottomOf="@+id/cenaKorpa" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

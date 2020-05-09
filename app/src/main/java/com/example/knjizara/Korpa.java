@@ -5,17 +5,24 @@
  */
 package com.example.knjizara;
 
+import android.app.Activity;
 import android.content.Context;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,13 +37,13 @@ public class Korpa implements Serializable {
     private ObjectInputStream in;
     private Context context;
     public Korpa (Context context) {
-        this.context = ((AppCompatActivity) context);
+        this.context = ((Context) context);
     }
 
     public void otvoriZaCitanje () {
         try {
             this.in = new ObjectInputStream(
-                    new FileInputStream("korpa.out"));
+                    new FileInputStream(context.getFilesDir().getAbsolutePath()+"/korpa.out"));
         }
         catch (Exception e) {
             System.out.println("Greska:" + e.getMessage());
@@ -65,7 +72,7 @@ public class Korpa implements Serializable {
     public void napraviFajl (ArrayList<Knjiga> knjige0) {
         try {
             this.out = new ObjectOutputStream(
-                    new FileOutputStream("korpa.out"));
+                    new FileOutputStream(context.getFilesDir().getAbsolutePath()+"/korpa.out"));
             if(knjige0 == null) {
                 ArrayList<Knjiga> knjige = new ArrayList<Knjiga>();
                 out.writeObject(knjige);
@@ -128,12 +135,14 @@ public class Korpa implements Serializable {
             ArrayList<Knjiga> knjige = getNiz();
             boolean provera = proveri(knjiga);
             if (provera == false) {
-                System.out.println("knjiga ne postoji i bice dodata.");
+                System.out.println("");
                 knjige.add(knjiga);
                 napraviFajl(knjige);
+                Toast.makeText(context,"Knjiga je dodata u korpu.",Toast.LENGTH_LONG).show();
+
             }
             else {
-                System.out.println("knjiga vec postoji.");
+                Toast.makeText(context,"Knjiga je vec dodata u korpu.",Toast.LENGTH_LONG).show();
             }
 
         } catch (IOException ex) {
@@ -147,19 +156,38 @@ public class Korpa implements Serializable {
             boolean provera = proveri(knjiga);
 
             if (provera == true) {
-
                 knjige.remove(knjiga);
                 napraviFajl(knjige);
                 System.out.println("knjiga je obrisana.");
+                Toast.makeText(context,"Knjiga je obrisana.",Toast.LENGTH_LONG).show();
             }
             else {
-                System.out.println("knjiga ne postoji u nizu.");
+                Toast.makeText(context,"Knjiga ne postoji u korpi.",Toast.LENGTH_LONG).show();
             }
 
         }
         catch (Exception e) {
             System.out.println("greska: " + e.getMessage());
         }
+    }
+    public int getSizeOfKorpa () {
+        int duzina = getNiz().size();
+        return duzina;
+    }
+    public double getUkupnaCenaKnjiga() {
+        ArrayList<Knjiga> knjige = getNiz();
+        double ukupno = 0.00;
+        for (Knjiga knjiga:knjige) {
+            ukupno+= Double.parseDouble(knjiga.cena);
+        }
+
+        return ukupno;
+    }
+    public void setStanjeKorpa () {
+
+        TextView stanjeKorpaView = (TextView) ((Activity) context).findViewById(R.id.stanjeKorpa);
+        String stanjeKorpa = String.format(Locale.US,"Korpa(%s): %s rsd.",String.valueOf(getSizeOfKorpa()),String.valueOf(getUkupnaCenaKnjiga()));
+        stanjeKorpaView.setText(stanjeKorpa);
     }
 
 }

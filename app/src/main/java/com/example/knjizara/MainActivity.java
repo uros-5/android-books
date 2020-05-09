@@ -5,14 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -125,14 +120,14 @@ public class MainActivity extends AppCompatActivity {
             RecyclerView recyclerView = findViewById(R.id.najpopularnijeKnjige0);
 
             recyclerView.setLayoutManager(layoutManager);
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,niz0);
+            TopLevelRVAdapter adapter = new TopLevelRVAdapter(this,niz0);
             recyclerView.setAdapter(adapter);
         }
         else if (kat == "besplatne") {
 
             RecyclerView recyclerView = findViewById(R.id.besplatneKnjige0);
             recyclerView.setLayoutManager(layoutManager);
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,niz1);
+            TopLevelRVAdapter adapter = new TopLevelRVAdapter(this,niz1);
             recyclerView.setAdapter(adapter);
         }
     }

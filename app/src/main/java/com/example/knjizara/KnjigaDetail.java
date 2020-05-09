@@ -13,6 +13,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.io.File;
+
 public class KnjigaDetail  extends AppCompatActivity {
     private static final String TAG = "KnjigaDetail";
 
@@ -93,6 +95,7 @@ public class KnjigaDetail  extends AppCompatActivity {
     public void dodajUKorpu(View view) {
 
         System.out.println("KNJIGA: "+knjiga);
+
         korpa.dodajKnjigu(knjiga);
 
     }

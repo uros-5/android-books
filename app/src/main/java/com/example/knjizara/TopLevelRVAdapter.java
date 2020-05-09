@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.ViewHolder> {
     ArrayList<Knjiga> niz0 = new ArrayList<>();
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "TopLevelRVAdapter";
 
-    public RecyclerViewAdapter(Context context, ArrayList<Knjiga> niz0) {
+    public TopLevelRVAdapter(Context context, ArrayList<Knjiga> niz0) {
         this.niz0 = niz0;
 
     }

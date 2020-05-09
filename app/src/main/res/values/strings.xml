@@ -15,4 +15,7 @@
     <string name="knjizara">KNJIZARA</string>
     <string name="moje_knjige">MOJE KNJIGE</string>
     <string name="nista" />
+    <string name="kupovina">Zavrsi kupovinu</string>
+    <string name="stanjeKorpa">Korpa(): 0 rsd .</string>
+    <string name="obrisi">Obrisi</string>
 </resources>
