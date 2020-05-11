@@ -34,7 +34,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/naslov"
         android:textSize="20sp"
-        android:inputType="textMultiLine"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toEndOf="@+id/slikaKorpa"

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,6 +39,10 @@ public class Korpa implements Serializable {
     private Context context;
     public Korpa (Context context) {
         this.context = ((Context) context);
+        File file = new File(context.getFilesDir().getAbsolutePath()+"/korpa.out");
+        if(!file.exists()){
+            napraviFajl(null);
+        }
     }
 
     public void otvoriZaCitanje () {
@@ -178,7 +183,9 @@ public class Korpa implements Serializable {
         ArrayList<Knjiga> knjige = getNiz();
         double ukupno = 0.00;
         for (Knjiga knjiga:knjige) {
-            ukupno+= Double.parseDouble(knjiga.cena);
+            if(!knjiga.cena.startsWith("Besplatno")) {
+                ukupno+= Double.parseDouble(knjiga.cena);
+            }
         }
 
         return ukupno;
@@ -189,5 +196,6 @@ public class Korpa implements Serializable {
         String stanjeKorpa = String.format(Locale.US,"Korpa(%s): %s rsd.",String.valueOf(getSizeOfKorpa()),String.valueOf(getUkupnaCenaKnjiga()));
         stanjeKorpaView.setText(stanjeKorpa);
     }
+
 
 }

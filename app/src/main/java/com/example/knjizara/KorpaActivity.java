@@ -5,14 +5,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.File;
 
 public class KorpaActivity extends AppCompatActivity {
     Korpa korpa;
+    KorisnikInfo korisnikInfo;
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,8 @@ public class KorpaActivity extends AppCompatActivity {
 
         initRecyclerView();
         korpa.setStanjeKorpa();
-        System.out.println("BROJ KNJIGA U KORPI: " + korpa.getSizeOfKorpa());
+        setListenerZavrsi();
+        korisnikInfo = new KorisnikInfo(this);
     }
     public void initRecyclerView () {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -56,6 +61,29 @@ public class KorpaActivity extends AppCompatActivity {
     }
     public void azurirajStanjeKorpe () {
         korpa.setStanjeKorpa();
+    }
+    public void zavrsiKupovinu() {
+        if(!korisnikInfo.checkFile()) {
+            Intent intent = new Intent(KorpaActivity.this,KorisnikInfoActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this,"Molim vas sacekajte..",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(KorpaActivity.this,PlacanjeActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
+    public void setListenerZavrsi() {
+        Button zkBtn = findViewById(R.id.zkBtn);
+        zkBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                zavrsiKupovinu();
+            }
+        });
+
     }
 
 }

@@ -9,8 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".KorpaActivity" android:label="@string/nista" ></activity>
-        <activity android:name=".MojeKnjigeActivity" android:label="@string/nista" />
+        <activity android:name=".PlacanjeActivity"
+            android:parentActivityName=".KorpaActivity"></activity>
+        <activity
+            android:name=".KorisnikInfoActivity"
+            android:parentActivityName=".KorpaActivity" />
+        <activity
+            android:name=".KorpaActivity"
+            android:label="@string/nista" />
+        <activity
+            android:name=".MojeKnjigeActivity"
+            android:label="@string/nista" />
         <activity
             android:name=".MainActivity"
             android:label="@string/nista">

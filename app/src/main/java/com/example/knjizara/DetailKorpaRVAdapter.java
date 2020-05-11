@@ -39,10 +39,10 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
 
         String cena = niz0.get(position).getCena();
         if(!cena.startsWith("Bespl")) {
-            cena+="RSD";
+            cena+=" RSD";
         }
         holder.naslov.setText(naslov);
-        holder.cena.setText(cena+" rsd.");
+        holder.cena.setText(cena);
         holder.layoutKorpa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +59,11 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
                     niz0.remove(position);
                     notifyItemRemoved(holder.getAdapterPosition());
                     notifyItemRangeChanged(holder.getAdapterPosition(),niz0.size());
+                    if (niz0.size() == 1) {
+                        notifyDataSetChanged();
+                    }
                     korpaActivity.azurirajStanjeKorpe();
+
                 }
 
             }
