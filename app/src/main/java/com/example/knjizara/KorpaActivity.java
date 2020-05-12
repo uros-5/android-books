@@ -8,9 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.knjizara.adapter.DetailKorpaRVAdapter;
+import com.example.knjizara.model.Knjiga;
+import com.example.knjizara.viewmodel.KorisnikInfo;
+import com.example.knjizara.viewmodel.Korpa;
 
 import java.io.File;
 
@@ -24,11 +30,7 @@ public class KorpaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_korpa);
 
         korpa = new Korpa(this);
-        File file = new File(getFilesDir().getAbsolutePath()+"/korpa.out");
-        if(!file.exists()){
-            korpa.napraviFajl(null);
-        }
-
+        System.out.println("LOKACIJA: "+getFilesDir().getAbsolutePath());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_glavni);
         setSupportActionBar(toolbar);
@@ -38,6 +40,7 @@ public class KorpaActivity extends AppCompatActivity {
         toolbarActivityListener.dodajListener(R.id.homeLayoutTopLevel);
         toolbarActivityListener.dodajListener(R.id.mojeKnjigeLayoutTopLevel);
 
+//        Log.i("DUZINA::: ",this.korpa.getNiz().size()+"");
 
         initRecyclerView();
         korpa.setStanjeKorpa();
@@ -63,14 +66,19 @@ public class KorpaActivity extends AppCompatActivity {
         korpa.setStanjeKorpa();
     }
     public void zavrsiKupovinu() {
-        if(!korisnikInfo.checkFile()) {
-            Intent intent = new Intent(KorpaActivity.this,KorisnikInfoActivity.class);
-            startActivity(intent);
+        if(korpa.getNiz().size()>0) {
+            if(!korisnikInfo.checkFile()) {
+                Intent intent = new Intent(KorpaActivity.this,KorisnikInfoActivity.class);
+                startActivity(intent);
+            }
+            else {
+
+                Intent intent = new Intent(KorpaActivity.this,PlacanjeActivity.class);
+                startActivity(intent);
+            }
         }
         else {
-            Toast.makeText(this,"Molim vas sacekajte..",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(KorpaActivity.this,PlacanjeActivity.class);
-            startActivity(intent);
+            Toast.makeText(this,"Niste dodali knjige u korpu.",Toast.LENGTH_LONG).show();
         }
 
     }

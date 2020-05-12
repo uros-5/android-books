@@ -4,24 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".MojeKnjigeActivity">
-
-    <include
-        layout="@layout/toolbar_glavni"
-        android:id="@+id/toolbar_glavni">
-
-    </include>
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/mojeKnjige0"
-        android:layout_width="wrap_content"
+        android:id="@+id/hronoloskaLista0"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="7dp"
         android:background="@color/katNajpBoja">
-
 
     </androidx.recyclerview.widget.RecyclerView>
 

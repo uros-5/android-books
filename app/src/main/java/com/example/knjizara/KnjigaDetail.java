@@ -2,7 +2,6 @@ package com.example.knjizara;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.io.File;
+import com.example.knjizara.model.Knjiga;
+import com.example.knjizara.viewmodel.Korpa;
 
 public class KnjigaDetail  extends AppCompatActivity {
     private static final String TAG = "KnjigaDetail";
@@ -42,6 +42,7 @@ public class KnjigaDetail  extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 
 
         try {
@@ -98,5 +99,11 @@ public class KnjigaDetail  extends AppCompatActivity {
 
         korpa.dodajKnjigu(knjiga);
 
+    }
+
+    public void vidiKategoriju (View view) {
+        Intent intent = new Intent(KnjigaDetail.this,KategorijaActivity.class);
+        intent.putExtra("Kategorija",knjiga.getKategorija());
+        startActivity(intent);
     }
 }

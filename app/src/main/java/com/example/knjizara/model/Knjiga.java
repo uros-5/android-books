@@ -1,11 +1,7 @@
-package com.example.knjizara;
+package com.example.knjizara.model;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Uros
- */
 public class Knjiga  implements Serializable{
     static final long serialVersionUID =-1868148438490984265L;
     String isbn;

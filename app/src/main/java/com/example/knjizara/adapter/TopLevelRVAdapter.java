@@ -1,4 +1,4 @@
-package com.example.knjizara;
+package com.example.knjizara.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.knjizara.KnjigaDetail;
+import com.example.knjizara.R;
+import com.example.knjizara.model.Knjiga;
+
 import java.util.ArrayList;
 
 public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.ViewHolder> {
     ArrayList<Knjiga> niz0 = new ArrayList<>();
     private static final String TAG = "TopLevelRVAdapter";
+    public int duzina = 6;
 
     public TopLevelRVAdapter(Context context, ArrayList<Knjiga> niz0) {
         this.niz0 = niz0;
@@ -61,7 +66,7 @@ public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 6;
+        return duzina;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -83,5 +88,8 @@ public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.Vi
             cena = itemView.findViewById(R.id.cena);
 
         }
+    }
+    public void setDuzina(int duzina) {
+        this.duzina = duzina;
     }
 }

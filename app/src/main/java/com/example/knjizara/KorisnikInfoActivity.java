@@ -6,13 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.lang.reflect.Field;
+import com.example.knjizara.model.Korisnik;
+import com.example.knjizara.viewmodel.KorisnikInfo;
+
 import java.util.ArrayList;
 
 public class KorisnikInfoActivity extends AppCompatActivity {

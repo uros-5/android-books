@@ -16,6 +16,7 @@
 
 
     <ScrollView
+        android:fillViewport="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp">
@@ -42,8 +43,14 @@
                 android:id="@+id/aktulna_knjiga2_layout"
                 layout="@layout/aktuelna_knjiga2"/>
 
+            <include
+                android:id="@+id/hronoloskaLista"
+                layout="@layout/hronoloska_lista"/>
+
+
         </LinearLayout>
 
     </ScrollView>
+
 
 </LinearLayout >

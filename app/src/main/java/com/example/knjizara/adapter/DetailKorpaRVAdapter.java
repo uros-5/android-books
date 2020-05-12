@@ -1,8 +1,7 @@
-package com.example.knjizara;
+package com.example.knjizara.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.knjizara.KorpaActivity;
+import com.example.knjizara.R;
+import com.example.knjizara.model.Knjiga;
 
 import java.util.ArrayList;
 

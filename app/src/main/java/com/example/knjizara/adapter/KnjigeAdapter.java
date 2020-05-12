@@ -1,4 +1,4 @@
-package com.example.knjizara;
+package com.example.knjizara.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.knjizara.R;
+import com.example.knjizara.model.Knjiga;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class KnjigeAdapter extends ArrayAdapter<Knjiga> {
     private static final String TAG = "KnjigeAdapter";

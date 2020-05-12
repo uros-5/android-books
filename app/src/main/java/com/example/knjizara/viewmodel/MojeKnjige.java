@@ -3,27 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.knjizara;
+package com.example.knjizara.viewmodel;
 
-import android.app.Activity;
 import android.content.Context;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.knjizara.model.Knjiga;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,15 +24,15 @@ import java.util.logging.Logger;
  *
  * @author Uros
  */
-
-public class Korpa implements Serializable {
+public class MojeKnjige implements Serializable {
     private static final long serialVersionUID = 1L;;
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private Context context;
-    public Korpa (Context context) {
+
+    public MojeKnjige (Context context) {
         this.context = ((Context) context);
-        File file = new File(context.getFilesDir().getAbsolutePath()+"/korpa.out");
+        File file = new File(context.getFilesDir().getAbsolutePath()+"/mojeKnjige.out");
         if(!file.exists()){
             napraviFajl(null);
         }
@@ -48,11 +41,11 @@ public class Korpa implements Serializable {
     public void otvoriZaCitanje () {
         try {
             this.in = new ObjectInputStream(
-                    new FileInputStream(context.getFilesDir().getAbsolutePath()+"/korpa.out"));
+                     new FileInputStream(context.getFilesDir().getAbsolutePath()+"/mojeKnjige.out"));
         }
-        catch (Exception e) {
-            System.out.println("Greska:" + e.getMessage());
-        }
+           catch (Exception e) {
+               System.out.println("Greska:" + e.getMessage());
+        } 
     }
     public ArrayList<Knjiga> getNiz () {
         try {
@@ -77,125 +70,101 @@ public class Korpa implements Serializable {
     public void napraviFajl (ArrayList<Knjiga> knjige0) {
         try {
             this.out = new ObjectOutputStream(
-                    new FileOutputStream(context.getFilesDir().getAbsolutePath()+"/korpa.out"));
+                new FileOutputStream(context.getFilesDir().getAbsolutePath()+"/mojeKnjige.out"));
             if(knjige0 == null) {
                 ArrayList<Knjiga> knjige = new ArrayList<Knjiga>();
                 out.writeObject(knjige);
-                this.out.close();
+                this.out.close(); 
             }
             else {
                 out.writeObject(knjige0);
                 this.out.close();
             }
-
+            
         }
         catch (Exception e) {
             System.out.println("Greska:" + e.getMessage());
-        }
-
+        } 
+    
     }
     public void otvoriZaDodavanje () {
         try {
             this.out = new ObjectOutputStream(
-                    new FileOutputStream("korpa.out"));
+                     new FileOutputStream(context.getFilesDir().getAbsolutePath()+"/mojeKnjige.out"));
         }
         catch (Exception e) {
-            System.out.println("Greska:" + e.getMessage());
-        }
-
+               System.out.println("Greska:" + e.getMessage());
+        } 
+    
     }
     public void zatvoriZaDodavanje () {
-        try {
-            out.close();
-        }
-        catch (Exception e) {
-            System.out.println("Greska:" + e.getMessage());
-        }
-
-    }
+      try {
+          out.close();
+       }
+       catch (Exception e) {
+           System.out.println("Greska:" + e.getMessage());
+       } 
+    
+    } 
     public boolean proveri (Knjiga knjiga) throws IOException {
+        
 
-
-        while(true) {
-            try {
-                //                in.readObject();
-                ArrayList<Knjiga> knjige = getNiz();
-                if(knjige.contains(knjiga)) {
-                    return true;
+            while(true) {
+                try {
+        //                in.readObject();
+                    ArrayList<Knjiga> knjige = getNiz();
+                    if(knjige.contains(knjiga)) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 }
-                else {
-                    return false;
+                catch (Exception e) {
+                    napraviFajl(null);
+                    System.out.println("Greska:" + e.getMessage());
+                    continue;
                 }
-            }
-            catch (Exception e) {
-                napraviFajl(null);
-                System.out.println("Greska:" + e.getMessage());
-                continue;
             }
         }
-    }
-
+    
     public void dodajKnjigu(Knjiga knjiga) {
         try {
             ArrayList<Knjiga> knjige = getNiz();
             boolean provera = proveri(knjiga);
             if (provera == false) {
-                System.out.println("");
+                System.out.println("knjiga ne postoji i bice dodata."); 
                 knjige.add(knjiga);
                 napraviFajl(knjige);
-                Toast.makeText(context,"Knjiga je dodata u korpu.",Toast.LENGTH_LONG).show();
-
             }
             else {
-                Toast.makeText(context,"Knjiga je vec dodata u korpu.",Toast.LENGTH_LONG).show();
+                System.out.println("knjiga vec postoji.");
             }
-
+            
         } catch (IOException ex) {
             Logger.getLogger(Korpa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void obrisiKnjigu(Knjiga knjiga) {
         try {
             ArrayList<Knjiga> knjige = getNiz();
             boolean provera = proveri(knjiga);
-
+            
             if (provera == true) {
+                
                 knjige.remove(knjiga);
                 napraviFajl(knjige);
                 System.out.println("knjiga je obrisana.");
-                Toast.makeText(context,"Knjiga je obrisana.",Toast.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(context,"Knjiga ne postoji u korpi.",Toast.LENGTH_LONG).show();
+                System.out.println("knjiga ne postoji u nizu.");
             }
-
+        
         }
         catch (Exception e) {
             System.out.println("greska: " + e.getMessage());
         }
     }
-    public int getSizeOfKorpa () {
-        int duzina = getNiz().size();
-        return duzina;
-    }
-    public double getUkupnaCenaKnjiga() {
-        ArrayList<Knjiga> knjige = getNiz();
-        double ukupno = 0.00;
-        for (Knjiga knjiga:knjige) {
-            if(!knjiga.cena.startsWith("Besplatno")) {
-                ukupno+= Double.parseDouble(knjiga.cena);
-            }
-        }
-
-        return ukupno;
-    }
-    public void setStanjeKorpa () {
-
-        TextView stanjeKorpaView = (TextView) ((Activity) context).findViewById(R.id.stanjeKorpa);
-        String stanjeKorpa = String.format(Locale.US,"Korpa(%s): %s rsd.",String.valueOf(getSizeOfKorpa()),String.valueOf(getUkupnaCenaKnjiga()));
-        stanjeKorpaView.setText(stanjeKorpa);
-    }
-
-
+    
 }

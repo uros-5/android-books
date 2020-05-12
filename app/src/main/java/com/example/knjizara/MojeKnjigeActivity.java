@@ -2,14 +2,20 @@ package com.example.knjizara;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 
+import com.example.knjizara.adapter.MojeKnjigeRVAdapter;
+import com.example.knjizara.viewmodel.MojeKnjige;
+
+import java.io.File;
+
 public class MojeKnjigeActivity extends AppCompatActivity {
+
+    MojeKnjige mojeKnjige;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,10 @@ public class MojeKnjigeActivity extends AppCompatActivity {
         toolbarActivityListener.dodajListener(R.id.homeLayoutTopLevel);
         toolbarActivityListener.dodajListener(R.id.kolicaLayoutTopLevel);
 
+        mojeKnjige = new MojeKnjige(this);
+
+        initRecyclerView();
+
 
 
     }
@@ -36,4 +46,13 @@ public class MojeKnjigeActivity extends AppCompatActivity {
         LinearLayout layout = (LinearLayout) findViewById(R.id.mojeKnjigeLayoutTopLevel);
         layout.setBackgroundResource(0);
     }
+
+    public void initRecyclerView () {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        RecyclerView recyclerView = findViewById(R.id.mojeKnjige0);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        MojeKnjigeRVAdapter adapter = new MojeKnjigeRVAdapter(this,mojeKnjige.getNiz());
+        recyclerView.setAdapter(adapter);
+    }
+
 }

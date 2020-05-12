@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:label="@string/knjiga"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PlacanjeActivity">
 
     <include
@@ -12,4 +14,120 @@
 
     </include>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/stanjeKorpa"
+                android:gravity="center"
+                android:text="Korpa(0): 1000,00 RSD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+            </TextView>
+
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/placanjeRV"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="7dp">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
+            <TextView
+                android:id="@+id/justCena"
+                android:gravity="right"
+                android:text="1000,00 RSD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+            </TextView>
+            <TextView
+                android:gravity="center"
+                android:text="Izaberite nacin placanja:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+            </TextView>
+            <RadioGroup
+                android:gravity="center|top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+                <RadioButton
+                    android:text="Platnom karticom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></RadioButton>
+                <RadioButton
+                    android:text="Vaucerom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></RadioButton>
+            </RadioGroup>
+
+            <Button
+                android:text="DALJE"
+                android:onClick="dodajUMojeKnjige"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+            </Button>
+
+            <Button
+                android:text="NAZAD"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+            </Button>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

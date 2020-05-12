@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PlacanjeActivity"
-            android:parentActivityName=".KorpaActivity"></activity>
+        <activity android:name=".KategorijaActivity"
+            android:parentActivityName=".MainActivity" ></activity>
+        <activity
+            android:name=".PlacanjeActivity"
+            android:parentActivityName=".KorpaActivity" />
         <activity
             android:name=".KorisnikInfoActivity"
             android:parentActivityName=".KorpaActivity" />
