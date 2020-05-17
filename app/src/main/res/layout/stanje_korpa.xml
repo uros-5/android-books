@@ -14,12 +14,12 @@
         android:layout_marginTop="24dp"
         android:text="@string/stanjeKorpa"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:background="@drawable/korpa_add_button"
+        android:textColor="@color/textColorPrimary"
         android:id="@+id/zkBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,4 +31,16 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stanjeKorpa" />
+
+    <TextView
+        android:id="@+id/cenaKorpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/cenaKorpa"
+        android:textSize="24sp"
+        android:textColor="@color/cenaColor"
+        app:layout_constraintStart_toEndOf="@+id/stanjeKorpa"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

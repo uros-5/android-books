@@ -3,27 +3,30 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="8dp"
     android:layout_margin="12dp"
-    android:background="@drawable/border_za_knjige">
+    android:elevation="2dp"
+    android:background="@drawable/okvir_za_card">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/slika2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/topLevelActivity">
 
         <LinearLayout
             android:id="@+id/besplatneKnjige0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/katNajpBoja">
+            android:background="@color/topLevelActivity">
 
             <ImageView
                 android:id="@+id/slika"
                 android:layout_width="wrap_content"
-                android:layout_height="225dp"
-                android:scaleType="fitStart"
+                android:layout_height="180dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
                 android:adjustViewBounds="true"
                 android:src="@drawable/popularnaknjiga1"
                 android:contentDescription="@string/nesto"
@@ -33,6 +36,7 @@
             <TextView
                 android:singleLine="true"
                 android:text="nesto"
+                android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/naslov"
                 android:ellipsize="end"
                 android:maxLines="1"
@@ -40,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"/>
             <TextView
+                android:fontFamily="sans-serif-light"
                 android:text="nesto"
                 android:id="@+id/autor"
                 android:layout_width="wrap_content"
@@ -49,6 +54,7 @@
             <TextView
                 android:text="500 RSD "
                 android:id="@+id/cena"
+                android:textSize="11sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right" />

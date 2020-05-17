@@ -6,15 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".KnjigaDetail">
+    tools:context=".activity.KnjigaDetail">
 
     <include
         layout="@layout/toolbar_knjiga"
         android:id="@+id/toolbar_knjiga">
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
     </include>
 
@@ -36,6 +32,8 @@
 
 
             <ImageView
+
+                android:elevation="1dp"
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,6 +52,7 @@
                 android:layout_marginTop="36dp"
                 android:text="@string/naslov"
                 android:textSize="20sp"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,16 +64,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/autor"
+                android:fontFamily="sans-serif"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/naslovKnjige" />
 
             <Button
+                android:background="@drawable/kategorija_button"
                 android:id="@+id/kategorijaKnjige"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/kategorija"
+                android:textColor="@color/textColorPrimary"
+                android:fontFamily="sans-serif-light"
                 android:onClick="vidiKategoriju"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,11 +87,12 @@
                 android:id="@+id/cenaKnjige"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginTop="32dp"
+                android:fontFamily="sans-serif-condensed"
                 android:text="@string/cena"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.46"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/kategorijaKnjige" />
 
@@ -104,6 +108,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cenaKnjige" />
 
             <Button
+                android:background="@drawable/korpa_add_button"
                 android:id="@+id/dugmeZaKorpu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -111,6 +116,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="70dp"
                 android:text="@string/korpaAdd"
+                android:textColor="@color/textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view"

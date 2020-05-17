@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="@string/katNajp"
+        android:textColor="@color/textColorSecondary"
         android:textSize="20sp">
     </TextView>
 

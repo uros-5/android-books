@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MojeKnjigeActivity">
+    tools:context=".activity.MojeKnjigeActivity">
 
     <include
         layout="@layout/toolbar_glavni"
@@ -19,8 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="7dp"
-        android:background="@color/katNajpBoja">
+        android:layout_margin="7dp">
 
 
     </androidx.recyclerview.widget.RecyclerView>

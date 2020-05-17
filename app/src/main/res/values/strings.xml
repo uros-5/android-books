@@ -16,6 +16,15 @@
     <string name="moje_knjige">MOJE KNJIGE</string>
     <string name="nista" />
     <string name="kupovina">Zavrsi kupovinu</string>
-    <string name="stanjeKorpa">Korpa(): 0 rsd .</string>
+    <string name="stanjeKorpa">Korpa(): </string>
+    <string name="cenaKorpa">0 rsd.</string>
     <string name="obrisi">Obrisi</string>
+    <string name="nacinPlacanja">Izaberite nacin placanja:</string>
+    <string name="nacinPlacanja1">Platnom karticom</string>
+    <string name="nacinPlacanja2">Vaucerom</string>
+    <string name="dalje">DALJE</string>
+    <string name="nazad">NAZAD</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

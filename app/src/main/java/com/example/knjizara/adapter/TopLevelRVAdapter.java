@@ -13,18 +13,23 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.knjizara.KnjigaDetail;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.knjizara.activity.KnjigaDetail;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.ViewHolder> {
     ArrayList<Knjiga> niz0 = new ArrayList<>();
     private static final String TAG = "TopLevelRVAdapter";
     public int duzina = 6;
+    public Context context;
 
     public TopLevelRVAdapter(Context context, ArrayList<Knjiga> niz0) {
+        this.context = context;
         this.niz0 = niz0;
 
     }
@@ -43,7 +48,7 @@ public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.Vi
 
         String cena = niz0.get(position).getCena();
         if(!cena.startsWith("Bespl")) {
-            cena+="RSD";
+            cena+=" RSD";
         }
         holder.naslov.setText(naslov);
         holder.autor.setText(niz0.get(position).getAutor());
@@ -57,12 +62,18 @@ public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.Vi
 
                 intent.putExtra(KnjigaDetail.EXTRA_ID, knjiga);
                 v.getContext().startActivity(intent);
-                Log.d(TAG,"isbn");
+                Animatoo.animateInAndOut(context);
+
             }
         });
 
+        String fajl = niz0.get(position).getIsbn()+".jpg";
+        holder.setSlika(fajl);
+
+
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -87,6 +98,10 @@ public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.Vi
             autor = itemView.findViewById(R.id.autor);
             cena = itemView.findViewById(R.id.cena);
 
+        }
+        public void setSlika(String fajl) {
+            File fileName = new File(context.getFilesDir().getAbsolutePath()+"/slike_knjiga/"+fajl);
+            Picasso.get().load(fileName).into(slika);
         }
     }
     public void setDuzina(int duzina) {

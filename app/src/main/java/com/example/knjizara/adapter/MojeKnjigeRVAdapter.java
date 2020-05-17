@@ -13,17 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.knjizara.KnjigaDetail;
+import com.example.knjizara.activity.KnjigaDetail;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapter.ViewHolder> {
     ArrayList<Knjiga> niz0 = new ArrayList<>();
     private static final String TAG = "MojeKnjigeRVAdapter";
+    public Context context;
+
 
     public MojeKnjigeRVAdapter(Context context, ArrayList<Knjiga> niz0) {
+        this.context = context;
         this.niz0 = niz0;
 
     }
@@ -55,6 +60,8 @@ public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapte
                 Log.d(TAG,"isbn");
             }
         });
+        String fajl = niz0.get(position).getIsbn()+".jpg";
+        holder.setSlika(fajl);
 
 
     }
@@ -82,6 +89,10 @@ public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapte
             autor = itemView.findViewById(R.id.autor);
             cena = itemView.findViewById(R.id.cena);
 
+        }
+        public void setSlika(String fajl) {
+            File fileName = new File(context.getFilesDir().getAbsolutePath()+"/slike_knjiga/"+fajl);
+            Picasso.get().load(fileName).into(slika);
         }
     }
 }

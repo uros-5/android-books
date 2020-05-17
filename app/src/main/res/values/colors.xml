@@ -2,11 +2,12 @@
 <resources>
     <color name="colorPrimary">#373e3c</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="textColorSecondary">#000000</color>
+    <color name="textColorSecondary">#6e706d</color>
     <color name="colorAccent">#D81B60</color>
     <color name="selectedItem">#565d5b</color>
 
     <color name="textColorPrimary">#FFFFFF</color>
-    <color name="katNajpBoja">#66B1B1B1</color>
-    <color name="topLevelActivity">#66F5F5F5</color>
+    <color name="katNajpBoja">#57E4E4E4</color>
+    <color name="topLevelActivity">#FFFFFF</color>
+    <color name="cenaColor">#FF3636</color>
 </resources>

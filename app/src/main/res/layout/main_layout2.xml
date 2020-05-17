@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toTopOf="parent"
+    tools:context=".activity.MainActivity2"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#405F5A"
+        app:tabTextColor="#000000">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/knjizaraTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KNJIZARA" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/mojeKnjigeTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MOJE KNJIGE" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/korpaTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KORPA" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewPager">
+
+    </androidx.viewpager.widget.ViewPager>
+
+</LinearLayout>

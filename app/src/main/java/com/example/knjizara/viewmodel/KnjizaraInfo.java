@@ -11,10 +11,17 @@ import com.example.knjizara.R;
 import com.example.knjizara.adapter.TopLevelRVAdapter;
 import com.example.knjizara.model.Knjiga;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class KnjizaraInfo {
     ObjectInputStream in;
@@ -116,6 +123,47 @@ public class KnjizaraInfo {
     public int randBroj(int br) {
         Random random = new Random();
         return random.nextInt(br);
+    }
+
+
+    public void unzipAll() throws FileNotFoundException, IOException {
+        String fileZip = "slike.zip";
+        InputStream is = context.getAssets().open("slike.zip");
+
+        File destDir = new File(context.getFilesDir().getAbsolutePath()+"/slike_knjiga");
+        if(!destDir.exists()) {
+            destDir.mkdirs();
+
+            byte[] buffer = new byte[1024];
+            ZipInputStream zis = new ZipInputStream(is);
+            ZipEntry zipEntry = zis.getNextEntry();
+            while (zipEntry != null) {
+                File newFile = moveFile(destDir, zipEntry);
+                FileOutputStream fos = new FileOutputStream(newFile);
+                int len;
+                while ((len = zis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
+                }
+                fos.close();
+                System.out.println("napravljeno1111");
+                zipEntry = zis.getNextEntry();
+            }
+            zis.closeEntry();
+            zis.close();
+        }
+
+    }
+    public static File moveFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+        File destFile = new File(destinationDir, zipEntry.getName());
+
+        String destDirPath = destinationDir.getCanonicalPath();
+        String destFilePath = destFile.getCanonicalPath();
+
+        if (!destFilePath.startsWith(destDirPath + File.separator)) {
+            throw new IOException("Entry is outside of the target dir: " + zipEntry.getName());
+        }
+
+        return destFile;
     }
 
 

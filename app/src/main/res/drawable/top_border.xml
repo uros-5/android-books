@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:bottom="-8dp" android:left="-8dp" android:right="-8dp">
         <shape>
-            <stroke android:color="#dadcd9" android:width="5dp"/>
+            <stroke android:color="#dadcd9" android:width="2dp"/>
         </shape>
         <inset
             android:drawable="@color/colorPrimary"

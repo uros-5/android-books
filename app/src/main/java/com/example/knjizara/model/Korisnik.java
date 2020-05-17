@@ -32,7 +32,6 @@ public class Korisnik  implements Serializable {
     }
 
     public Korisnik() {
-        
     }
     
     @Override

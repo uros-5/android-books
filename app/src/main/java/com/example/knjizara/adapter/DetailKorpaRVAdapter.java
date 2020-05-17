@@ -12,12 +12,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.knjizara.KorpaActivity;
+import com.example.knjizara.activity.KorpaActivity;
 import com.example.knjizara.R;
+import com.example.knjizara.fragments.Tab3;
 import com.example.knjizara.model.Knjiga;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdapter.ViewHolder> {
@@ -25,11 +29,11 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
     ArrayList<Knjiga> niz0 = new ArrayList<>();
     private static final String TAG = "DetailKorpaRVAdapter";
     public Context context;
-    public KorpaActivity korpaActivity;
+    public Tab3 korpaActivity;
 
-    public DetailKorpaRVAdapter(Context context, ArrayList<Knjiga> niz0) {
-        this.context = context;
-        korpaActivity = (KorpaActivity) ((Activity) context);
+    public DetailKorpaRVAdapter(Fragment context, ArrayList<Knjiga> niz0) {
+        this.context = context.getContext();
+        korpaActivity = (Tab3) ((Fragment) context);
         this.niz0 = niz0;
 
     }
@@ -70,6 +74,8 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
 
             }
         });
+        String fajl = niz0.get(position).getIsbn()+".jpg";
+        holder.setSlika(fajl);
 
 
     }
@@ -105,6 +111,11 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
             cena = itemView.findViewById(R.id.cenaKorpa);
             brisanjeBtn = itemView.findViewById(R.id.brisanjeBtn);
 
+        }
+
+        public void setSlika(String fajl) {
+            File fileName = new File(context.getFilesDir().getAbsolutePath()+"/slike_knjiga/"+fajl);
+            Picasso.get().load(fileName).into(slika);
         }
     }
 }

@@ -1,19 +1,23 @@
 package com.example.knjizara;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.knjizara.activity.KorpaActivity;
+import com.example.knjizara.activity.MainActivity;
+import com.example.knjizara.activity.MojeKnjigeActivity;
+
 public class ToolbarActivityListener {
     public int glavniLayout;
     public Context context;
     public LinearLayout layout;
+
     public ToolbarActivityListener (int resId,Context context) {
+
         this.glavniLayout = resId;
         this.context = context;
         setSelectedLayout();
@@ -44,11 +48,11 @@ public class ToolbarActivityListener {
         if (glavniLayout==R.id.homeLayoutTopLevel) {
             switch(resId){
                 case R.id.mojeKnjigeLayoutTopLevel:
-                    intent = new Intent(context,MojeKnjigeActivity.class);
+                    intent = new Intent(context, MojeKnjigeActivity.class);
                     context.startActivity(intent);
                     break;
                 case R.id.kolicaLayoutTopLevel:
-                    intent = new Intent(context,KorpaActivity.class) ;
+                    intent = new Intent(context, KorpaActivity.class) ;
                     context.startActivity(intent);
                     break;
             }
@@ -56,7 +60,7 @@ public class ToolbarActivityListener {
         else if (glavniLayout == R.id.mojeKnjigeLayoutTopLevel) {
             switch(resId){
                 case R.id.homeLayoutTopLevel:
-                    intent = new Intent(context,MainActivity.class);
+                    intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
                     break;
                 case R.id.kolicaLayoutTopLevel:

@@ -9,13 +9,13 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-
+        android:elevation="1dp"
         android:id="@+id/najpopularnijeKnjige0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="7dp"
-        android:background="@color/katNajpBoja">
+        android:background="@drawable/top_level_rv_bg">
 
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="@string/katBesp"
+        android:textColor="@color/textColorSecondary"
         android:textSize="20sp">
     </TextView>
 
