@@ -12,7 +12,10 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.knjizara.activity.MainActivity2;
 import com.example.knjizara.activity.MojeKnjigeActivity;
+import com.example.knjizara.fragments.Tab2;
+import com.example.knjizara.activity.PseudoNotificationActivity;
 
 import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
@@ -32,7 +35,9 @@ public class NotificationHelper {
     {
         Intent resultIntent = new Intent(mContext , MojeKnjigeActivity.class);
         if(aktivnost=="MojeKnjigeActivity") {
-            resultIntent = new Intent(mContext , MojeKnjigeActivity.class);
+            resultIntent = new Intent(mContext , PseudoNotificationActivity.class);
+            resultIntent.putExtra("MojeKnjige","MojeKnjige");
+
         }
 
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

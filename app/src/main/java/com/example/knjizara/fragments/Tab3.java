@@ -1,15 +1,18 @@
 package com.example.knjizara.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +25,15 @@ import com.example.knjizara.activity.KorisnikInfoActivity;
 import com.example.knjizara.activity.KorpaActivity;
 import com.example.knjizara.activity.PlacanjeActivity;
 import com.example.knjizara.adapter.DetailKorpaRVAdapter;
+import com.example.knjizara.adapter.MojeKnjigeRVAdapter;
+import com.example.knjizara.interfaces.FragmentStartListener;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
+import com.example.knjizara.viewmodel.ListenerKorpa;
+import com.example.knjizara.viewmodel.ListenerMojeKnjige;
+
+import java.util.List;
 
 
 public class Tab3 extends Fragment {
@@ -32,6 +41,10 @@ public class Tab3 extends Fragment {
     RecyclerView recyclerView;
     public KorpaSP korpaSP;
     public KorisnikSP korisnikSP;
+    public FragmentStartListener fragmentStartListener;
+    AppCompatActivity activity;
+    public DetailKorpaRVAdapter adapter;
+    public ListenerKorpa listenerKorpa;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +63,7 @@ public class Tab3 extends Fragment {
         recyclerView = rootView.findViewById(R.id.knjige_iz_korpe0);
 
         recyclerView.setLayoutManager(layoutManager);
-        DetailKorpaRVAdapter adapter = new DetailKorpaRVAdapter(this,korpaSP.getKorpa());
+        adapter = new DetailKorpaRVAdapter(this,korpaSP.getKorpa());
         recyclerView.setAdapter(adapter);
 
     }
@@ -76,22 +89,31 @@ public class Tab3 extends Fragment {
     public void zavrsiKupovinu() {
 
         if(korpaSP.getSizeOfKorpa()>0) {
-            if(korisnikSP.isNull() == false) {
-
-                Intent intent = new Intent(getActivity(), KorisnikInfoActivity.class);
-                startActivity(intent);
-                Animatoo.animateDiagonal(getActivity());
-            }
-            else {
-
-                Intent intent = new Intent(getActivity(), PlacanjeActivity.class);
-                startActivity(intent);
-                Animatoo.animateSlideLeft(getActivity());
-            }
+            PlacanjeActivity placanjeActivity = new PlacanjeActivity();
+            Intent intent = new Intent(getActivity(), placanjeActivity.getClass());
+            startActivity(intent);
+            Animatoo.animateSlideLeft(getActivity());
         }
         else {
             Toast.makeText(getActivity(),"Niste dodali knjige u korpu.",Toast.LENGTH_LONG).show();
         }
 
     }
+
+    public void setListenerKorpa(ListenerKorpa listenerKorpa) {
+        this.listenerKorpa = listenerKorpa;
+    }
+
+    public void updateTab() {
+        azurirajStanjeKorpe();
+        adapter = new DetailKorpaRVAdapter(this,korpaSP.getKorpa());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+//    @Override
+//    public void onActivityCreated(Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//
+//    }
 }

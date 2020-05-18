@@ -58,4 +58,8 @@ public class KategorijaActivity extends AppCompatActivity {
         super.onBackPressed();
         Animatoo.animateSwipeRight(this);
     }
+    public void onPause() {
+        finish();
+        super.onPause();
+    }
 }

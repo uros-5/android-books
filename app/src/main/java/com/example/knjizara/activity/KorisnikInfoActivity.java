@@ -44,16 +44,8 @@ public class KorisnikInfoActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
-        switch(item.getItemId()) {
-//            case R.id.idi_nazad:
-//
-//                Intent intent = new Intent(this,MainActivity.class);
-//                startActivity(intent);
-//                return true;
-            default:
-                onBackPressed();
-                return super.onOptionsItemSelected(item);
-        }
+        onBackPressed();
+        return true;
     }
 
     public void checkFields() {
@@ -89,8 +81,9 @@ public class KorisnikInfoActivity extends AppCompatActivity {
             korisnikSP.setKorisnik(korisnik);
 
             Toast.makeText(this,"Uspesno ste se registrovali.",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(KorisnikInfoActivity.this,PlacanjeActivity.class);
-            startActivity(intent);
+            finish();
+//            Intent intent = new Intent(KorisnikInfoActivity.this,PlacanjeActivity.class);
+//            startActivity(intent);
             Animatoo.animateSlideUp(this);
         }
 
@@ -106,9 +99,18 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        finish();
+//        super.onBackPressed();
+        korisnikSP.setBack(true);
+        System.out.println("sada je true");
         Animatoo.animateSwipeRight(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
 }

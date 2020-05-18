@@ -19,6 +19,7 @@ import com.example.knjizara.R;
 import com.example.knjizara.ToolbarActivityListener;
 import com.example.knjizara.adapter.DetailKorpaRVAdapter;
 import com.example.knjizara.model.Knjiga;
+import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 import com.squareup.picasso.Picasso;
@@ -29,6 +30,7 @@ public class KorpaActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     public KorpaSP korpaSP;
     public KorisnikSP korisnikSP;
+    public CurrentTabSP currentTabSP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class KorpaActivity extends AppCompatActivity {
 
         setListenerZavrsi();
         korisnikSP = new KorisnikSP(this);
+        currentTabSP = new CurrentTabSP(this);
     }
     public void initRecyclerView () {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -78,7 +81,7 @@ public class KorpaActivity extends AppCompatActivity {
 
         if(korpaSP.getSizeOfKorpa()>0) {
             if(korisnikSP.isNull() == false) {
-
+                currentTabSP.setCT(33);
                 Intent intent = new Intent(KorpaActivity.this,KorisnikInfoActivity.class);
                 startActivity(intent);
                 Animatoo.animateDiagonal(this);

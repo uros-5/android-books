@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.example.knjizara.R;
 import com.example.knjizara.adapter.PlacanjeRVAdapter;
 import com.example.knjizara.fragments.Tab1;
 import com.example.knjizara.model.Knjiga;
+import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 import com.example.knjizara.viewmodel.MojeKnjige;
@@ -31,6 +34,7 @@ import java.util.ArrayList;
 
 public class PlacanjeActivity extends AppCompatActivity {
 
+
     MojeKnjige mojeKnjige;
     RecyclerView recyclerView;
     public KorpaSP korpaSP;
@@ -38,6 +42,9 @@ public class PlacanjeActivity extends AppCompatActivity {
     public MojeKnjigeSP mojeKnjigeSP;
     private final String CHANNEL_ID = "PlacanjeActivity";
     NotificationHelper notificationHelper;
+    public ViewPager viewPager;
+    CurrentTabSP currentTabSP;
+
 
 
     @Override
@@ -54,12 +61,10 @@ public class PlacanjeActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        korpaSP = new KorpaSP(this);
-        korpaSP.setStanje(null);
-        korpaSP.setUkupnaCena();
 
-        mojeKnjigeSP = new MojeKnjigeSP(this);
-        initRecyclerView();
+        korisnikSP = new KorisnikSP(this);
+        proveraKorisnika();
+        currentTabSP = new CurrentTabSP(this);
     }
 
     public void initRecyclerView () {
@@ -72,9 +77,16 @@ public class PlacanjeActivity extends AppCompatActivity {
 
     }
     public void dodajUMojeKnjige (View view) {
-        Intent intent = new Intent(PlacanjeActivity.this,MainActivity.class);
-        startActivity(intent);
-        // toast
+//        Intent intent = new Intent(PlacanjeActivity.this,MainActivity2.class);
+//        startActivity(intent);
+        try {
+            finish();
+            currentTabSP.setCT(2);
+            Animatoo.animateSwipeRight(this);
+        }
+        catch (Exception e) {
+            System.out.println("greskkaaaa;;; "+ e.getMessage());
+        }
 
 
         final Toast toastProc = Toast.makeText(this,"Transakcija se obradjuje..",Toast.LENGTH_LONG);
@@ -98,23 +110,28 @@ public class PlacanjeActivity extends AppCompatActivity {
                     mojeKnjigeSP.dodaj(knjiga);
                 }
                 korpaSP.setAray(null);
-
                 notificationHelper.createNotification("Uplata za knjige","Transakcija je uspesna.","MojeKnjigeActivity");
+
 
             }
         }, 5000);
+        runOnUiThread(new Runnable() {
+            public void run() {
+            }
+        });
+
 
     }
 
     public void nazad(View view) {
-        Intent intent = new Intent(PlacanjeActivity.this,KorisnikInfoActivity.class);
-        startActivity(intent);
+        finish();
         Animatoo.animateSwipeRight(this);
     }
 
     public void onBackPressed() {
         super.onBackPressed();
         Animatoo.animateSwipeRight(this);
+//        this.viewPager.setCurrentItem(0);
     }
 
     @Override
@@ -131,6 +148,50 @@ public class PlacanjeActivity extends AppCompatActivity {
         }
     }
 
+    public void setViewPager(ViewPager viewPager) {
+        this.viewPager = viewPager;
+
+    }
+
+    public void setAll() {
+        korpaSP = new KorpaSP(this);
+        korpaSP.setStanje(null);
+        korpaSP.setUkupnaCena();
+
+        mojeKnjigeSP = new MojeKnjigeSP(this);
+        initRecyclerView();
+    }
+
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        proveraKorisnika();
+    }
+    public void proveraKorisnika() {
+        if(korisnikSP.isNull() == false) {
+            while(true) {
+                if(korisnikSP.getBack() == true) {
+                    finish();
+                    System.out.println("dokaz2 da je true");
+                    korisnikSP.setBack(false);
+                    break;
+                }
+                else {
+                    System.out.println("dokaz2 da nije true");
+//                    onPause();
+                    Intent intent = new Intent(this, KorisnikInfoActivity.class);
+                    startActivity(intent);
+                    Animatoo.animateDiagonal(this);
+                    korisnikSP.setBack(false);
+                    break;
+                }
+            }
+        }
+        else{
+            setAll();
+        }
+    }
 
 
 

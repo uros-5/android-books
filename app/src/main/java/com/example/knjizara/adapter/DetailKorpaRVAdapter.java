@@ -80,6 +80,10 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
 
     }
 
+    public void azurirajMojeKnjige() {
+
+    }
+
     @Override
     public int getItemCount() {
         return niz0.size();

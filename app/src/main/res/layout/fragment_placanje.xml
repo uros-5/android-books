@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:label="@string/knjiga"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.PlacanjeFragment"
+    android:id="@+id/fragment_placanje">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/stanjeKorpa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/stanjeKorpa"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                <TextView
+                    android:id="@+id/cenaKorpa"
+                    android:textColor="@color/cenaColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/cenaKorpa"
+                    android:textSize="25sp"
+                    app:layout_constraintStart_toEndOf="@+id/stanjeKorpa"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_gravity="end"
+                android:id="@+id/placanjeRV"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
+
+            <TextView
+                android:id="@+id/justCena"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="end"
+                android:text="@string/cenaKorpa"
+
+                android:textSize="25sp"></TextView>
+            <TextView
+                android:gravity="center"
+                android:text="@string/nacinPlacanja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+            </TextView>
+            <RadioGroup
+                android:gravity="center|top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+                <RadioButton
+                    android:text="@string/nacinPlacanja1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></RadioButton>
+                <RadioButton
+                    android:text="@string/nacinPlacanja2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></RadioButton>
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/addUMojeKnjigeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="@string/dalje">
+
+            </Button>
+
+            <Button
+                android:id="@+id/backButton"
+                android:text="@string/nazad"
+                android:onClick="nazad"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+            </Button>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

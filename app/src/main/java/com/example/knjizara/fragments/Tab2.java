@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.MojeKnjigeRVAdapter;
+import com.example.knjizara.viewmodel.ListenerMojeKnjige;
 import com.example.knjizara.viewmodel.MojeKnjige;
 import com.example.knjizara.viewmodel.MojeKnjigeSP;
 
@@ -23,6 +24,11 @@ public class Tab2 extends Fragment {
     View rootView;
     MojeKnjige mojeKnjige;
     MojeKnjigeSP mojeKnjigeSP;
+    public ListenerMojeKnjige listenerMojeKnjige;
+    GridLayoutManager gridLayoutManager;
+    public RecyclerView recyclerView;
+    public MojeKnjigeRVAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,10 +41,10 @@ public class Tab2 extends Fragment {
         return rootView;
     }
     public void initRecyclerView () {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
-        RecyclerView recyclerView = rootView.findViewById(R.id.mojeKnjige0);
+        gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        recyclerView = rootView.findViewById(R.id.mojeKnjige0);
         recyclerView.setLayoutManager(gridLayoutManager);
-        MojeKnjigeRVAdapter adapter = new MojeKnjigeRVAdapter(getActivity(),mojeKnjigeSP.getMojeKnjige());
+        adapter = new MojeKnjigeRVAdapter(getActivity(),mojeKnjigeSP.getMojeKnjige());
         recyclerView.setAdapter(adapter);
     }
     public void cancelNotification() {
@@ -50,5 +56,14 @@ public class Tab2 extends Fragment {
         catch (Exception e) {
 
         }
+    }
+    public void setListenerMojeKnjige(ListenerMojeKnjige listenerMojeKnjige) {
+        this.listenerMojeKnjige = listenerMojeKnjige;
+    }
+    public void updateTab() {
+        adapter = new MojeKnjigeRVAdapter(getActivity(),mojeKnjigeSP.getMojeKnjige());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
     }
 }

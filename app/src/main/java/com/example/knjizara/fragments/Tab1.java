@@ -111,7 +111,8 @@ public class Tab1 extends Fragment {
         prefsEditor.putString("korisnik",jsonKorisnik);
         prefsEditor.putString("korpa",jsonKorpa);
         prefsEditor.putString("mojeKnjige",jsonMojeKnjige);
-
+        prefsEditor.putBoolean("korisnikBack",false);
+        prefsEditor.putInt("currentTab",0);
 
         prefsEditor.apply();
 

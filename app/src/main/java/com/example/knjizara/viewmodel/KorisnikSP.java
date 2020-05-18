@@ -13,6 +13,7 @@ public class KorisnikSP {
    SharedPreferences pref;
    SharedPreferences.Editor prefsEditor;
    Context context;
+   public boolean back;
 
    public KorisnikSP (Context context) {
 
@@ -23,6 +24,8 @@ public class KorisnikSP {
        prefsEditor = pref.edit();
 
        gson = new Gson();
+
+       back = false;
    }
 
    public boolean isNull() {
@@ -46,4 +49,15 @@ public class KorisnikSP {
        prefsEditor.apply();
 
    }
+   public boolean getBack() {
+       boolean back = pref.getBoolean("korisnikBack",false);
+//       System.out.println("DA VIDIMO: "+back);
+       return back;
+   }
+   public void setBack(boolean back) {
+       prefsEditor.putBoolean("korisnikBack",back);
+       prefsEditor.apply();
+   }
+
+
 }
