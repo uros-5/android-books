@@ -1,7 +1,5 @@
 package com.example.knjizara;
 
-import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,13 +10,9 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.knjizara.activity.MainActivity2;
-import com.example.knjizara.activity.MojeKnjigeActivity;
-import com.example.knjizara.fragments.Tab2;
-import com.example.knjizara.activity.PseudoNotificationActivity;
+import com.example.knjizara.activity.FakeNotificationActivity;
 
 import static android.app.Notification.DEFAULT_SOUND;
-import static android.app.Notification.DEFAULT_VIBRATE;
 
 public class NotificationHelper {
 
@@ -33,9 +27,10 @@ public class NotificationHelper {
 
     public void createNotification(String title, String message, String aktivnost)
     {
-        Intent resultIntent = new Intent(mContext , MojeKnjigeActivity.class);
+        Intent resultIntent = new Intent(mContext , FakeNotificationActivity.class);
         if(aktivnost=="MojeKnjigeActivity") {
-            resultIntent = new Intent(mContext , PseudoNotificationActivity.class);
+            resultIntent = new Intent(mContext , FakeNotificationActivity.class);
+            resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             resultIntent.putExtra("MojeKnjige","MojeKnjige");
 
         }

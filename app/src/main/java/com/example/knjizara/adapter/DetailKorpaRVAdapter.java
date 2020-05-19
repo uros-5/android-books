@@ -1,6 +1,5 @@
 package com.example.knjizara.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.knjizara.activity.KorpaActivity;
 import com.example.knjizara.R;
 import com.example.knjizara.fragments.Tab3;
 import com.example.knjizara.model.Knjiga;

@@ -3,9 +3,6 @@ package com.example.knjizara.activity;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -13,7 +10,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -22,20 +18,16 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.knjizara.NotificationHelper;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.PlacanjeRVAdapter;
-import com.example.knjizara.fragments.Tab1;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
-import com.example.knjizara.viewmodel.MojeKnjige;
 import com.example.knjizara.viewmodel.MojeKnjigeSP;
 
 import java.util.ArrayList;
 
 public class PlacanjeActivity extends AppCompatActivity {
 
-
-    MojeKnjige mojeKnjige;
     RecyclerView recyclerView;
     public KorpaSP korpaSP;
     public KorisnikSP korisnikSP;
@@ -173,12 +165,10 @@ public class PlacanjeActivity extends AppCompatActivity {
             while(true) {
                 if(korisnikSP.getBack() == true) {
                     finish();
-                    System.out.println("dokaz2 da je true");
                     korisnikSP.setBack(false);
                     break;
                 }
                 else {
-                    System.out.println("dokaz2 da nije true");
 //                    onPause();
                     Intent intent = new Intent(this, KorisnikInfoActivity.class);
                     startActivity(intent);

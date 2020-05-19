@@ -145,7 +145,6 @@ public class KnjizaraInfo {
                     fos.write(buffer, 0, len);
                 }
                 fos.close();
-                System.out.println("napravljeno1111");
                 zipEntry = zis.getNextEntry();
             }
             zis.closeEntry();

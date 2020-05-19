@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PseudoNotificationActivity"></activity>
+        <activity
+            android:name=".activity.FakeNotificationActivity"
+            android:theme="@style/PseudoNotificationActivity"></activity>
         <activity android:name=".activity.MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,15 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".ServicePlacanje"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".activity.KategorijaActivity"
-            android:parentActivityName=".activity.MainActivity" />
+            android:parentActivityName=".activity.MainActivity2" />
         <activity
             android:name=".activity.PlacanjeActivity"
             android:hardwareAccelerated="false"
@@ -37,18 +33,9 @@
             android:parentActivityName=".activity.MainActivity2"
             android:theme="@style/KorisnikInfo" />
         <activity
-            android:name=".activity.KorpaActivity"
-            android:label="@string/nista" />
-        <activity
-            android:name=".activity.MojeKnjigeActivity"
-            android:label="@string/nista" />
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/nista"></activity>
-        <activity
             android:name=".activity.KnjigaDetail"
             android:label="@string/knjiga"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName=".activity.MainActivity2"
             android:theme="@style/KnjigaDetail">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

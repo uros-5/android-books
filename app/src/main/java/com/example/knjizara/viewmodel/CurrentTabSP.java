@@ -25,7 +25,6 @@ public class CurrentTabSP {
     public void setCT(int ct) {
         prefsEditor.putInt("currentTab",ct);
         prefsEditor.apply();
-        System.out.println("NOTIFIKACIJA BROJ "+ct);
     }
     public int getCT() {
         int ct = pref.getInt("currentTab",0);

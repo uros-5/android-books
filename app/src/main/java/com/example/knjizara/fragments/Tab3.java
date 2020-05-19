@@ -1,9 +1,6 @@
 package com.example.knjizara.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,19 +17,13 @@ import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.knjizara.R;
-import com.example.knjizara.activity.KorisnikInfoActivity;
-import com.example.knjizara.activity.KorpaActivity;
 import com.example.knjizara.activity.PlacanjeActivity;
 import com.example.knjizara.adapter.DetailKorpaRVAdapter;
-import com.example.knjizara.adapter.MojeKnjigeRVAdapter;
 import com.example.knjizara.interfaces.FragmentStartListener;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 import com.example.knjizara.viewmodel.ListenerKorpa;
-import com.example.knjizara.viewmodel.ListenerMojeKnjige;
-
-import java.util.List;
 
 
 public class Tab3 extends Fragment {

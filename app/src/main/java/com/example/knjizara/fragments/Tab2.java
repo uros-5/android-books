@@ -16,13 +16,11 @@ import android.view.ViewGroup;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.MojeKnjigeRVAdapter;
 import com.example.knjizara.viewmodel.ListenerMojeKnjige;
-import com.example.knjizara.viewmodel.MojeKnjige;
 import com.example.knjizara.viewmodel.MojeKnjigeSP;
 
 
 public class Tab2 extends Fragment {
     View rootView;
-    MojeKnjige mojeKnjige;
     MojeKnjigeSP mojeKnjigeSP;
     public ListenerMojeKnjige listenerMojeKnjige;
     GridLayoutManager gridLayoutManager;

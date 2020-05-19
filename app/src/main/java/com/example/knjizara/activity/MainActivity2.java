@@ -29,7 +29,6 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout2);
-        System.out.println("PRVI PUT");
 
         initData();
 
@@ -55,10 +54,9 @@ public class MainActivity2 extends AppCompatActivity {
                         try {
                             pagerAdapter.updateTab2();
                             listenerMojeKnjige.setCounter(listenerMojeKnjige.getSizeOfSP());
-                            System.out.println("BILI SU RAZLICITI1");
                         }
                         catch (Exception e) {
-                            System.out.println("BILI SU GRESKA");
+                            System.out.println("greska");
                         }
                     }
                 }
@@ -67,10 +65,9 @@ public class MainActivity2 extends AppCompatActivity {
                         try {
                             pagerAdapter.updateTab3();
                             listenerKorpa.setCounter(listenerKorpa.getSizeOfSP());
-                            System.out.println("BILI SU RAZLICITI2");
                         }
                         catch (Exception e) {
-                            System.out.println("BILI SU GRESKA");
+                            System.out.println("greska");
                         }
                     }
                 }
@@ -94,11 +91,10 @@ public class MainActivity2 extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(3);
         currentTabSP = new CurrentTabSP(this);
         currentTabSP.setCT(0);
-        System.out.println("SAMO JEDANPUT");
+        setupTabIcons();
     }
 
     public void onRestart() {
-        System.out.println("NOTIFIKACIJA BROJ PROVERA");
         super.onRestart();
         if(currentTabSP.getCT()==2) {
             Handler handlerUpdate = new Handler();
@@ -135,6 +131,11 @@ public class MainActivity2 extends AppCompatActivity {
             onRestart();
         }
     }
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(R.drawable.baseline_account_balance_black_48dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.moje_knjige);
+        tabLayout.getTabAt(2).setIcon(R.drawable.kolica);
+    }
 
     public void setImportantListeners(){
         listenerMojeKnjige = new ListenerMojeKnjige(this);
@@ -144,8 +145,6 @@ public class MainActivity2 extends AppCompatActivity {
         listenerKorpa = new ListenerKorpa(this);
         listenerKorpa.setCounter(0);
         pagerAdapter.getKorpaListener(listenerKorpa);
-
-        System.out.println("BRAVOOOO");
     }
     public void cancelNotification() {
         try {

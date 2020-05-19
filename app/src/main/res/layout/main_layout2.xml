@@ -14,8 +14,8 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#405F5A"
-        app:tabTextColor="#000000">
+        android:background="#373e3c"
+        app:tabTextColor="#FFFFFF">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/knjizaraTab"

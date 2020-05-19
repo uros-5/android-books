@@ -2,10 +2,6 @@ package com.example.knjizara.viewmodel;
 
 import android.content.Context;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.knjizara.adapter.MojeKnjigeRVAdapter;
-
 public class ListenerMojeKnjige {
     public int counter = 0;
     public MojeKnjigeSP mojeKnjigeSP;
