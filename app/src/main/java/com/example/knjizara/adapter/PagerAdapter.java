@@ -1,7 +1,11 @@
 package com.example.knjizara.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -10,11 +14,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.knjizara.activity.PopUpMojeKnjige;
 import com.example.knjizara.fragments.Tab1;
 import com.example.knjizara.fragments.Tab2;
 import com.example.knjizara.fragments.Tab3;
 import com.example.knjizara.viewmodel.ListenerKorpa;
 import com.example.knjizara.viewmodel.ListenerMojeKnjige;
+import com.google.android.material.tabs.TabLayout;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     private int numoftabs;
@@ -66,7 +72,20 @@ public class PagerAdapter extends FragmentPagerAdapter {
         tab2.updateTab();
     }
     public void updateTab3() {
-
         tab3.updateTab();
     }
+    public void longListener(TabLayout tabLayout) {
+        //dobij tablayout implementiraj drugi
+        LinearLayout tabs = (LinearLayout) tabLayout.getChildAt(0);
+        tabs.getChildAt(1).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(v.getContext(), PopUpMojeKnjige.class);
+                v.getContext().startActivity(intent);
+//                Toast.makeText(v.getContext(), "Tab clicked" , Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+    }
+
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mojeKnjigePopUp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:background="@drawable/border_za_knjige"
+
+    tools:context=".activity.PopUpMojeKnjige">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#2f6699"
+        android:padding="10dp"
+        android:text="@string/pregledP"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:gravity="start|top"
+        android:background="@drawable/border_for_placanje_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorSecondary"
+            android:padding="10dp"
+            android:layout_weight="1.0"
+            android:text="@string/besp"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/besplatneCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/brTest"
+            android:padding="10dp"
+            android:textSize="25sp"
+            android:textColor="@color/textColorSecondary"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="start|top"
+        android:background="@drawable/border_for_placanje_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorSecondary"
+            android:padding="10dp"
+            android:layout_weight="1.0"
+            android:text="@string/kup"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/placeneCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/brTest"
+            android:padding="10dp"
+            android:textSize="25sp"
+            android:textColor="@color/textColorSecondary"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/ukupno2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/textColorPrimary"
+        android:background="@color/textColorSecondary"/>
+    <TextView
+        android:id="@+id/ukupno22"
+        android:text="@string/ukupnoKnjige2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/textColorPrimary"
+        android:background="@color/textColorSecondary"/>
+    <Button
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nazad"
+        android:layout_gravity="center"
+        android:background="#2f6699"
+        android:textSize="25sp"
+        android:onClick="onBackBtn"
+        android:textColor="@color/textColorPrimary"></Button>
+
+
+</LinearLayout>

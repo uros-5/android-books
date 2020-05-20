@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.Menu;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -89,16 +90,8 @@ public class KnjigaDetail  extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
-        switch(item.getItemId()) {
-//            case R.id.idi_nazad:
-//
-//                Intent intent = new Intent(this,MainActivity.class);
-//                startActivity(intent);
-//                return true;
-            default:
-                onBackPressed();
-                return super.onOptionsItemSelected(item);
-        }
+        onBackPressed();
+        return true;
     }
 
     public void setSlika(ImageView slika,String fajl) {
@@ -126,5 +119,9 @@ public class KnjigaDetail  extends AppCompatActivity {
     public void onPause() {
         finish();
         super.onPause();
+    }
+
+    public void postComment(View view) {
+        Toast.makeText(this,"U sledecoj verziji.",Toast.LENGTH_LONG).show();
     }
 }

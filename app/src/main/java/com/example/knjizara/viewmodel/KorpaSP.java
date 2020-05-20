@@ -15,6 +15,7 @@ import com.example.knjizara.model.Knjiga;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -80,8 +81,8 @@ public class KorpaSP {
                 ukupno+= Double.parseDouble(knjiga.getCena());
             }
         }
-
-        return ukupno;
+        DecimalFormat df = new DecimalFormat("0.00");
+        return Double.parseDouble(df.format(ukupno));
     }
 
     public void setAray (ArrayList<Knjiga> niz) {

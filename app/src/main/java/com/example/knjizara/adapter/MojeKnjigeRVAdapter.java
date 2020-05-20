@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -52,12 +53,7 @@ public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapte
             @Override
             public void onClick(View v) {
                 Knjiga knjiga = niz0.get(position);
-                Intent intent = new Intent(v.getContext(),
-                        KnjigaDetail.class);
-
-                intent.putExtra(KnjigaDetail.EXTRA_ID, knjiga);
-                v.getContext().startActivity(intent);
-                Log.d(TAG,"isbn");
+                Toast.makeText(v.getContext(),""+knjiga.getNaslov(),Toast.LENGTH_LONG).show();
             }
         });
         String fajl = niz0.get(position).getIsbn()+".jpg";

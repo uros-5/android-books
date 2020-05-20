@@ -24,7 +24,19 @@
     <string name="nacinPlacanja2">Vaucerom</string>
     <string name="dalje">DALJE</string>
     <string name="nazad">NAZAD</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="login">PRIJAVI SE</string>
+    <string name="register">REGISTRUJ SE</string>
+    <string name="besp">Besplatne knjige</string>
+    <string name="kup">Kupljene knjige</string>
+    <string name="ukupno2">Ukupno novca potroseno</string>
+    <string name="ukupnoKnjige2">1000 RSD</string>
+    <string name="pregledP">Pregled placanja</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="brTest">0</string>
+    <string name="komentar">Unesite svoj komentar o knjizi ...</string>
+    <string name="komentarBtn">OSTAVI KOMENTAR</string>
 </resources>

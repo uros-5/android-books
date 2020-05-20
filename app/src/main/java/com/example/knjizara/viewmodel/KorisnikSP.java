@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import com.example.knjizara.model.Korisnik;
 import com.google.gson.Gson;
 
+import java.security.spec.ECField;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class KorisnikSP {
@@ -31,12 +33,19 @@ public class KorisnikSP {
    public boolean isNull() {
 
        Korisnik korisnik = getKorisnik();
-       if(korisnik.getKartica() == null || korisnik.getKartica() == "") {
+       try{
+           if(korisnik.getKartica() == null || korisnik.getKartica() == "") {
+               return false;
+           }
+           else {
+               return true;
+           }
+       }
+       catch (Exception e) {
+           setKorisnik(korisnik);
            return false;
        }
-       else {
-           return true;
-       }
+
    }
    public Korisnik getKorisnik () {
        String json = pref.getString("korisnik","");

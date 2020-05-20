@@ -1,49 +1,63 @@
 package com.example.knjizara.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingComponent;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.knjizara.NotificationHelper;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.PagerAdapter;
 import com.example.knjizara.viewmodel.CurrentTabSP;
+import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.ListenerKorpa;
 import com.example.knjizara.viewmodel.ListenerMojeKnjige;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
 public class MainActivity2 extends AppCompatActivity {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private TabItem knjizaraTab,mojeKnjigeTab,korpaTab;
+    private ViewDataBinding binding ;
+
+
+    @Nullable @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @Nullable @BindView(R.id.viewPager) ViewPager viewPager;
+    @Nullable @BindView(R.id.knjizaraTab) TabItem knjizaraTab;
+    @Nullable @BindView(R.id.mojeKnjigeTab) TabItem mojeKnjigeTab;
+    @Nullable @BindView(R.id.korpaTab) TabItem korpaTab;
+
     public PagerAdapter pagerAdapter;
     ListenerMojeKnjige listenerMojeKnjige;
     ListenerKorpa listenerKorpa;
     CurrentTabSP currentTabSP;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_layout2);
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this,R.layout.main_layout2);
+        Toast.makeText(this,"Ucitavanje resursa..",Toast.LENGTH_LONG).show();
         initData();
 
     }
 
     public void initData() {
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        knjizaraTab = (TabItem) findViewById(R.id.knjizaraTab);
-        mojeKnjigeTab = (TabItem) findViewById(R.id.mojeKnjigeTab);
-        korpaTab = (TabItem) findViewById(R.id.korpaTab);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
 
+        ButterKnife.bind(this);
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
-
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -92,6 +106,7 @@ public class MainActivity2 extends AppCompatActivity {
         currentTabSP = new CurrentTabSP(this);
         currentTabSP.setCT(0);
         setupTabIcons();
+        pagerAdapter.longListener(tabLayout);
     }
 
     public void onRestart() {
@@ -114,7 +129,6 @@ public class MainActivity2 extends AppCompatActivity {
             handlerUpdate.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    cancelNotification();
                     pagerAdapter.updateTab2();
                     viewPager.setCurrentItem(1);
                     currentTabSP.setCT(0);
@@ -146,16 +160,7 @@ public class MainActivity2 extends AppCompatActivity {
         listenerKorpa.setCounter(0);
         pagerAdapter.getKorpaListener(listenerKorpa);
     }
-    public void cancelNotification() {
-        try {
-            NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.cancelAll();
 
-        }
-        catch (Exception e) {
-
-        }
-    }
 
 
 

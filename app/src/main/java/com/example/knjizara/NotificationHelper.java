@@ -11,6 +11,7 @@ import android.provider.Settings;
 import androidx.core.app.NotificationCompat;
 
 import com.example.knjizara.activity.FakeNotificationActivity;
+import com.example.knjizara.activity.LoginActivity;
 
 import static android.app.Notification.DEFAULT_SOUND;
 
@@ -28,11 +29,18 @@ public class NotificationHelper {
     public void createNotification(String title, String message, String aktivnost)
     {
         Intent resultIntent = new Intent(mContext , FakeNotificationActivity.class);
+        boolean autoCancel = false;
         if(aktivnost=="MojeKnjigeActivity") {
             resultIntent = new Intent(mContext , FakeNotificationActivity.class);
             resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             resultIntent.putExtra("MojeKnjige","MojeKnjige");
+            autoCancel = false;
 
+        }
+        if(aktivnost=="LoginActivity") {
+            resultIntent = new Intent(mContext, LoginActivity.class);
+            resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            autoCancel = true;
         }
 
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -45,7 +53,7 @@ public class NotificationHelper {
         mBuilder.setSmallIcon(R.drawable.ic_sms_notiffication);
         mBuilder.setContentTitle(title)
                 .setContentText(message)
-                .setAutoCancel(false)
+                .setAutoCancel(autoCancel)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentIntent(resultPendingIntent);
 

@@ -34,7 +34,7 @@ public class KategorijaActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String kategorija = intent.getStringExtra("Kategorija");
-
+        this.setTitle("KNJIZARA - "+ kategorija);
         ArrayList<Knjiga> niz = knjizaraInfo.getBooksCategory(kategorija);
         knjizaraInfo.initKategorijaRV(niz);
 
@@ -42,20 +42,12 @@ public class KategorijaActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
-        switch(item.getItemId()) {
-//            case R.id.idi_nazad:
-//
-//                Intent intent = new Intent(this,MainActivity.class);
-//                startActivity(intent);
-//                return true;
-            default:
-                onBackPressed();
-                return super.onOptionsItemSelected(item);
-        }
+        onBackPressed();
+        return true;
     }
 
     public void onBackPressed() {
-        super.onBackPressed();
+        finish();
         Animatoo.animateSwipeRight(this);
     }
     public void onPause() {

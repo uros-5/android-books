@@ -2,22 +2,26 @@ package com.example.knjizara.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.knjizara.NotificationHelper;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.TopLevelRVAdapter;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.model.Korisnik;
 import com.example.knjizara.viewmodel.KnjizaraInfo;
+import com.example.knjizara.viewmodel.KorisnikSP;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -34,6 +38,7 @@ public class Tab1 extends Fragment {
     SharedPreferences.Editor prefsEditor;
     public final String CHANNEL_ID = "PlacanjeActivity";
     public int NOTIFICATION_ID = 001;
+    NotificationHelper notificationHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class Tab1 extends Fragment {
         niz0 = knjizaraInfo.getNiz(0);
         niz1 = knjizaraInfo.getNiz(1);
         hronoloskaLista = knjizaraInfo.mixBooks();
+        notificationHelper = new NotificationHelper(getContext());
+
 
         pref = getActivity().getSharedPreferences("com.example.knjizara", getActivity().MODE_PRIVATE);
         prefsEditor = pref.edit();
@@ -54,7 +61,7 @@ public class Tab1 extends Fragment {
         else {
             Log.i("MainActivity ","Setup appdata uradjen ranije. ");
         }
-
+        requestNotification();
         try {
             knjizaraInfo.unzipAll();
         } catch (IOException e) {
@@ -123,5 +130,17 @@ public class Tab1 extends Fragment {
             return true;
         }
         return false;
+    }
+
+    public void requestNotification() {
+        KorisnikSP korisnikSP = new KorisnikSP(getContext());
+        if(!korisnikSP.isNull()) {
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    notificationHelper.createNotification("Prijavite se.","Vise mogucnosti sa jednim klikom!","LoginActivity");
+                }
+            }, 6000);
+        }
+        korisnikSP = null;
     }
 }

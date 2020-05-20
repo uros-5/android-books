@@ -4,14 +4,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_logo"
         android:label="@string/knjizara"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.PopUpMojeKnjige"
+            android:theme="@style/PopUpActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
         <activity
             android:name=".activity.FakeNotificationActivity"
-            android:theme="@style/PseudoNotificationActivity"></activity>
+            android:theme="@style/PseudoNotificationActivity" />
         <activity android:name=".activity.MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +24,7 @@
         </activity>
         <activity
             android:name=".activity.KategorijaActivity"
-            android:parentActivityName=".activity.MainActivity2" />
+            android:parentActivityName=".activity.KnjigaDetail" />
         <activity
             android:name=".activity.PlacanjeActivity"
             android:hardwareAccelerated="false"

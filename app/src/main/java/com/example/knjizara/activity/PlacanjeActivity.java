@@ -128,16 +128,8 @@ public class PlacanjeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
-        switch(item.getItemId()) {
-//            case R.id.idi_nazad:
-//
-//                Intent intent = new Intent(this,MainActivity.class);
-//                startActivity(intent);
-//                return true;
-            default:
-                onBackPressed();
-                return super.onOptionsItemSelected(item);
-        }
+        onBackPressed();
+        return true;
     }
 
     public void setViewPager(ViewPager viewPager) {

@@ -57,6 +57,7 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         String brojPoste = ((EditText)findViewById(R.id.brojPosteEdit)).getText().toString();
         String kartica = ((EditText)findViewById(R.id.karticaEdit)).getText().toString();
         String email = ((EditText)findViewById(R.id.emailEdit)).getText().toString();
+        String password = ((EditText)findViewById(R.id.passwordKor)).getText().toString();
 
         ArrayList<String> niz = new ArrayList<String>();
         niz.add(ime);
@@ -66,6 +67,7 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         niz.add(brojPoste);
         niz.add(kartica);
         niz.add(email);
+        niz.add(password);
 
         boolean toAdd = true;
         for(String field:niz) {
