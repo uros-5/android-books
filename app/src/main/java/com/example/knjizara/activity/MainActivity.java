@@ -2,23 +2,17 @@ package com.example.knjizara.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingComponent;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
-import com.example.knjizara.NotificationHelper;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.PagerAdapter;
 import com.example.knjizara.viewmodel.CurrentTabSP;
-import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.ListenerKorpa;
 import com.example.knjizara.viewmodel.ListenerMojeKnjige;
 import com.google.android.material.tabs.TabItem;
@@ -28,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private ViewDataBinding binding ;
 
 
@@ -47,7 +41,7 @@ public class MainActivity2 extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.main_layout2);
+        binding = DataBindingUtil.setContentView(this,R.layout.main_layout);
         Toast.makeText(this,"Ucitavanje resursa..",Toast.LENGTH_LONG).show();
         initData();
 

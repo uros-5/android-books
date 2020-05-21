@@ -69,7 +69,7 @@ public class PlacanjeActivity extends AppCompatActivity {
 
     }
     public void dodajUMojeKnjige (View view) {
-//        Intent intent = new Intent(PlacanjeActivity.this,MainActivity2.class);
+//        Intent intent = new Intent(PlacanjeActivity.this,MainActivity.class);
 //        startActivity(intent);
         try {
             finish();

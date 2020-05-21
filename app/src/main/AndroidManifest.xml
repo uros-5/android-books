@@ -15,7 +15,7 @@
         <activity
             android:name=".activity.FakeNotificationActivity"
             android:theme="@style/PseudoNotificationActivity" />
-        <activity android:name=".activity.MainActivity2">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,15 +30,15 @@
             android:hardwareAccelerated="false"
             android:label="PLACANJE"
             android:largeHeap="true"
-            android:parentActivityName=".activity.MainActivity2" />
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.KorisnikInfoActivity"
-            android:parentActivityName=".activity.MainActivity2"
+            android:parentActivityName=".activity.MainActivity"
             android:theme="@style/KorisnikInfo" />
         <activity
             android:name=".activity.KnjigaDetail"
             android:label="@string/knjiga"
-            android:parentActivityName=".activity.MainActivity2"
+            android:parentActivityName=".activity.MainActivity"
             android:theme="@style/KnjigaDetail">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
