@@ -20,8 +20,9 @@ public class Korisnik  implements Serializable {
     public String kartica;
     public String brojPoste;
     public String grad;
+    public String id;
 
-    public Korisnik(String ime, String prezime, String ulicaIBroj, String email, String kartica, String brojPoste,String grad) {
+    public Korisnik(String ime, String prezime, String ulicaIBroj, String email, String kartica, String brojPoste,String grad,String id) {
         this.ime = ime;
         this.prezime = prezime;
         this.ulicaIBroj = ulicaIBroj;
@@ -29,6 +30,7 @@ public class Korisnik  implements Serializable {
         this.kartica = kartica;
         this.brojPoste = brojPoste;
         this.grad = grad;
+        this.id = id;
     }
 
     public Korisnik() {
@@ -75,7 +77,7 @@ public class Korisnik  implements Serializable {
     }
 
     public String toString () {
-        return ime;
+        return id;
     }
     
 }

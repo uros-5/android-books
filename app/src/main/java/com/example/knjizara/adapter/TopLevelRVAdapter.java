@@ -23,12 +23,18 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.ViewHolder> {
-    ArrayList<Knjiga> niz0 = new ArrayList<>();
+    ArrayList<ArrayList> niz0 = new ArrayList<>();
     private static final String TAG = "TopLevelRVAdapter";
     public int duzina = 6;
     public Context context;
 
-    public TopLevelRVAdapter(Context context, ArrayList<Knjiga> niz0) {
+//    public TopLevelRVAdapter(Context context, ArrayList<Knjiga> niz0) {
+//        this.context = context;
+//        this.niz0 = niz0;
+//
+//    }
+
+    public TopLevelRVAdapter(Context context, ArrayList<ArrayList> niz0) {
         this.context = context;
         this.niz0 = niz0;
 
@@ -44,32 +50,38 @@ public class TopLevelRVAdapter extends RecyclerView.Adapter<TopLevelRVAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        String naslov = niz0.get(position).getNaslov();
+        String naslov = niz0.get(position).get(1).toString();
 
-        String cena = niz0.get(position).getCena();
-        if(!cena.startsWith("Bespl")) {
+        String cena = niz0.get(position).get(2).toString();
+        if(!cena.startsWith("0")) {
             cena+=" RSD";
         }
+        else if(cena.startsWith("0")) {
+            cena = "Besplatno";
+        }
         holder.naslov.setText(naslov);
-        holder.autor.setText(niz0.get(position).getAutor());
+        holder.autor.setText(niz0.get(position).get(3).toString());
         holder.cena.setText(cena);
         holder.slika2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Knjiga knjiga = niz0.get(position);
+                String knjiga = niz0.get(position).get(0).toString();;
+                String id = niz0.get(position).get(5).toString();
                 Intent intent = new Intent(v.getContext(),
                         KnjigaDetail.class);
 
-                intent.putExtra(KnjigaDetail.EXTRA_ID, knjiga);
+                intent.putExtra(KnjigaDetail.EXTRA_ID, id);
                 v.getContext().startActivity(intent);
                 Animatoo.animateInAndOut(context);
 
             }
         });
 
-        String fajl = niz0.get(position).getIsbn()+".jpg";
-        holder.setSlika(fajl);
 
+
+        String fajl = niz0.get(position).get(0).toString()+".jpg";
+
+        holder.setSlika(fajl);
 
 
     }

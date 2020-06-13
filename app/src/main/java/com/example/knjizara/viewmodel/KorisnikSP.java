@@ -34,7 +34,7 @@ public class KorisnikSP {
 
        Korisnik korisnik = getKorisnik();
        try{
-           if(korisnik.getKartica() == null || korisnik.getKartica() == "") {
+           if(korisnik.id == null || korisnik.id == "") {
                return false;
            }
            else {
@@ -60,7 +60,6 @@ public class KorisnikSP {
    }
    public boolean getBack() {
        boolean back = pref.getBoolean("korisnikBack",false);
-//       System.out.println("DA VIDIMO: "+back);
        return back;
    }
    public void setBack(boolean back) {

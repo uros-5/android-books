@@ -1,12 +1,13 @@
 package com.example.knjizara.viewmodel;
 
+import android.app.Activity;
 import android.content.Context;
 
 public class ListenerKorpa {
     public int counter = 0;
     public KorpaSP korpaSP;
-    public ListenerKorpa (Context context) {
-        korpaSP = new KorpaSP(context);
+    public ListenerKorpa (Activity activity) {
+        korpaSP = new KorpaSP(activity);
     }
     public void setCounter(int counter) {
         this.counter = counter;
@@ -25,4 +26,5 @@ public class ListenerKorpa {
             return false;
         }
     }
+
 }

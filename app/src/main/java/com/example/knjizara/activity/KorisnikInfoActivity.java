@@ -13,8 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Korisnik;
+import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 
 import java.util.ArrayList;
@@ -27,6 +29,10 @@ public class KorisnikInfoActivity extends AppCompatActivity {
 
     public KorisnikSP korisnikSP;
 
+    public Klijent klijent;
+
+    CurrentTabSP currentTabSP;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         korisnikSP = new KorisnikSP(this);
+        klijent = new Klijent();
+        currentTabSP = new CurrentTabSP(this);
 
         setListenerPotvrdi();
     }
@@ -52,6 +60,7 @@ public class KorisnikInfoActivity extends AppCompatActivity {
 
         String ime = ((EditText)findViewById(R.id.imeEdit)).getText().toString();
         String prezime = ((EditText)findViewById(R.id.prezimeEdit)).getText().toString();
+        String username = ((EditText)findViewById(R.id.usernameEdit)).getText().toString();
         String ulicaIBroj = ((EditText)findViewById(R.id.ulicaIBrojEdit)).getText().toString();
         String grad = ((EditText)findViewById(R.id.gradEdit)).getText().toString();
         String brojPoste = ((EditText)findViewById(R.id.brojPosteEdit)).getText().toString();
@@ -62,6 +71,7 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         ArrayList<String> niz = new ArrayList<String>();
         niz.add(ime);
         niz.add(prezime);
+        niz.add(username);
         niz.add(ulicaIBroj);
         niz.add(grad);
         niz.add(brojPoste);
@@ -73,17 +83,24 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         for(String field:niz) {
 
             if(field.length() == 0) {
-                System.out.println("Morate popuniti sva polja."+ field.length());
                 toAdd = false;
                 Toast.makeText(this,"Morate popuniti sva polja.",Toast.LENGTH_LONG).show();
             }
         }
         if(toAdd == true) {
-            Korisnik korisnik = new Korisnik(ime,prezime,ulicaIBroj,email,kartica,brojPoste,grad);
+            String primer = String.format("INSERT INTO osoba (username,email,sifra,ime,prezime,ulicaIBroj,brojPoste,grad) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
+                    username,email,password,ime,prezime,ulicaIBroj,brojPoste,grad);
+            ArrayList<ArrayList> lista = klijent.sendM("countOsoba");
+            String id = lista.get(0).get(0).toString();
+            String primer2 = String.format("INSERT INTO korisnici (osoba_id) VALUES (%s);",id);
+            klijent.sendM("addUser "+primer+" " + primer2);
+
+            Korisnik korisnik = new Korisnik(ime,prezime,ulicaIBroj,email,kartica,brojPoste,grad,id);
             korisnikSP.setKorisnik(korisnik);
 
             Toast.makeText(this,"Uspesno ste se registrovali.",Toast.LENGTH_LONG).show();
             finish();
+
 //            Intent intent = new Intent(KorisnikInfoActivity.this,PlacanjeActivity.class);
 //            startActivity(intent);
             Animatoo.animateSlideUp(this);
@@ -107,7 +124,6 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         finish();
 //        super.onBackPressed();
         korisnikSP.setBack(true);
-        System.out.println("sada je true");
         Animatoo.animateSwipeRight(this);
     }
     @Override

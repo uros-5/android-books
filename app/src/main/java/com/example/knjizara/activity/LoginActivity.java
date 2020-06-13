@@ -8,15 +8,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Korisnik;
+import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     KorisnikSP korisnikSP;
+
+    public Klijent klijent;
+
+    CurrentTabSP currentTabSP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         korisnikSP = new KorisnikSP(this);
+
+        klijent = new Klijent();
+
+        currentTabSP = new CurrentTabSP(this);
     }
 
     @Override
@@ -50,11 +63,32 @@ public class LoginActivity extends AppCompatActivity {
         Animatoo.animateDiagonal(this);
     }
     public void onLogin(View view) {
-        Toast.makeText(this,"Pogresni parametri..",Toast.LENGTH_LONG).show();
+        String username = ((EditText)findViewById(R.id.username2)).getText().toString();
+        String sifra = ((EditText)findViewById(R.id.password2)).getText().toString();
+
+        if(username!="" && sifra!="") {
+            ArrayList<ArrayList> lista = klijent.sendM("getUser " +username+" " +sifra);
+            try{
+                String usernameFromDb = lista.get(0).get(0).toString();
+                String id = lista.get(0).get(1).toString();
+                Korisnik korisnik = new Korisnik();
+                korisnik.id = id;
+                korisnikSP.setKorisnik(korisnik);
+                onRestart();
+                Toast.makeText(this,"Dobrodosli.",Toast.LENGTH_LONG).show();
+
+            }
+            catch (Exception e) {
+                Toast.makeText(this,"Pogresni parametri..",Toast.LENGTH_LONG).show();
+            }
+        }
+
+
     }
     public void onRestart() {
         super.onRestart();
         if(korisnikSP.isNull()) {
+            currentTabSP.setCT(4);
            onBackPressed();
             Animatoo.animateSlideUp(this);
         }

@@ -15,14 +15,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.knjizara.Klijent;
 import com.example.knjizara.NotificationHelper;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.PlacanjeRVAdapter;
-import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
-import com.example.knjizara.viewmodel.MojeKnjigeSP;
 
 import java.util.ArrayList;
 
@@ -31,11 +30,11 @@ public class PlacanjeActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     public KorpaSP korpaSP;
     public KorisnikSP korisnikSP;
-    public MojeKnjigeSP mojeKnjigeSP;
     private final String CHANNEL_ID = "PlacanjeActivity";
     NotificationHelper notificationHelper;
     public ViewPager viewPager;
     CurrentTabSP currentTabSP;
+    Klijent klijent;
 
 
 
@@ -57,6 +56,7 @@ public class PlacanjeActivity extends AppCompatActivity {
         korisnikSP = new KorisnikSP(this);
         proveraKorisnika();
         currentTabSP = new CurrentTabSP(this);
+        klijent = new Klijent();
     }
 
     public void initRecyclerView () {
@@ -77,7 +77,7 @@ public class PlacanjeActivity extends AppCompatActivity {
             Animatoo.animateSwipeRight(this);
         }
         catch (Exception e) {
-            System.out.println("greskkaaaa;;; "+ e.getMessage());
+            System.out.println("greska: "+ e.getMessage());
         }
 
 
@@ -97,10 +97,16 @@ public class PlacanjeActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ArrayList<Knjiga> niz0 = korpaSP.getKorpa();
-                for (Knjiga knjiga:niz0) {
-                    mojeKnjigeSP.dodaj(knjiga);
+                ArrayList<String> niz0 = korpaSP.getKorpa();
+                String request = "ids ";
+                for (String string:niz0) {
+                    request+=string+" ";
                 }
+                ArrayList<ArrayList> lista = klijent.sendM("countNarudzbine");
+                String idNarudzbine = lista.get(0).get(0).toString();
+                request+=idNarudzbine+" ";
+                request+=korisnikSP.getKorisnik().toString();
+                klijent.sendM(request);
                 korpaSP.setAray(null);
                 notificationHelper.createNotification("Uplata za knjige","Transakcija je uspesna.","MojeKnjigeActivity");
 
@@ -141,8 +147,6 @@ public class PlacanjeActivity extends AppCompatActivity {
         korpaSP = new KorpaSP(this);
         korpaSP.setStanje(null);
         korpaSP.setUkupnaCena();
-
-        mojeKnjigeSP = new MojeKnjigeSP(this);
         initRecyclerView();
     }
 

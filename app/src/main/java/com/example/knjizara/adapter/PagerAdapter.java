@@ -11,15 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+
 
 import com.example.knjizara.activity.PopUpMojeKnjige;
 import com.example.knjizara.fragments.Tab1;
 import com.example.knjizara.fragments.Tab2;
 import com.example.knjizara.fragments.Tab3;
-import com.example.knjizara.viewmodel.ListenerKorpa;
-import com.example.knjizara.viewmodel.ListenerMojeKnjige;
 import com.google.android.material.tabs.TabLayout;
 
 public class PagerAdapter extends FragmentPagerAdapter {
@@ -28,7 +25,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Tab1 tab1 = new Tab1();
     public Tab2 tab2 = new Tab2();
     public Tab3 tab3 = new Tab3();
-    public ViewPager viewPager;
 
     public PagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
@@ -61,13 +57,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
         return POSITION_NONE;
     }
 
-
-    public void getMojeKnjigeListener(ListenerMojeKnjige listenerMojeKnjige) {
-        tab2.setListenerMojeKnjige(listenerMojeKnjige);
-    }
-    public void getKorpaListener(ListenerKorpa listenerKorpa) {
-        tab3.setListenerKorpa(listenerKorpa);
-    }
     public void updateTab2() {
         tab2.updateTab();
     }

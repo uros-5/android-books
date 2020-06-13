@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     @Nullable @BindView(R.id.korpaTab) TabItem korpaTab;
 
     public PagerAdapter pagerAdapter;
-    ListenerMojeKnjige listenerMojeKnjige;
     ListenerKorpa listenerKorpa;
     CurrentTabSP currentTabSP;
 
@@ -57,28 +56,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition()==1){
-                    if(!listenerMojeKnjige.compare()) {
-                        try {
-                            pagerAdapter.updateTab2();
-                            listenerMojeKnjige.setCounter(listenerMojeKnjige.getSizeOfSP());
-                        }
-                        catch (Exception e) {
-                            System.out.println("greska");
-                        }
-                    }
-                }
-                else if(tab.getPosition()==2) {
-                    if(!listenerKorpa.compare()) {
-                        try {
-                            pagerAdapter.updateTab3();
-                            listenerKorpa.setCounter(listenerKorpa.getSizeOfSP());
-                        }
-                        catch (Exception e) {
-                            System.out.println("greska");
-                        }
-                    }
-                }
 
 
             }
@@ -95,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        setImportantListeners();
         viewPager.setOffscreenPageLimit(3);
         currentTabSP = new CurrentTabSP(this);
         currentTabSP.setCT(0);
@@ -123,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             handlerUpdate.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    pagerAdapter.updateTab3();
                     pagerAdapter.updateTab2();
                     viewPager.setCurrentItem(1);
                     currentTabSP.setCT(0);
@@ -130,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, 600);
 
+        }
+        else if(currentTabSP.getCT()==0) {
+            pagerAdapter.updateTab3();
+        }
+        else if(currentTabSP.getCT() == 4) {
+            pagerAdapter.updateTab2();
         }
     }
 
@@ -144,20 +127,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.moje_knjige);
         tabLayout.getTabAt(2).setIcon(R.drawable.kolica);
     }
-
-    public void setImportantListeners(){
-        listenerMojeKnjige = new ListenerMojeKnjige(this);
-        listenerMojeKnjige.setCounter(0);
-        pagerAdapter.getMojeKnjigeListener(listenerMojeKnjige);
-
-        listenerKorpa = new ListenerKorpa(this);
-        listenerKorpa.setCounter(0);
-        pagerAdapter.getKorpaListener(listenerKorpa);
-    }
-
-
-
-
 
 }
 

@@ -110,7 +110,7 @@ public class KnjizaraInfo {
         }
         return nizKat;
     }
-    public void initKategorijaRV(ArrayList<Knjiga> niz) {
+    public void initKategorijaRV(ArrayList<ArrayList> niz) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
 
         RecyclerView recyclerView = ((AppCompatActivity) context).findViewById(R.id.kategorijaLista0);
@@ -130,7 +130,12 @@ public class KnjizaraInfo {
         String fileZip = "slike.zip";
         InputStream is = context.getAssets().open("slike.zip");
 
+
+
+
         File destDir = new File(context.getFilesDir().getAbsolutePath()+"/slike_knjiga");
+//        FileUtils.forceDelete(new File(destination));
+
         if(!destDir.exists()) {
             destDir.mkdirs();
 

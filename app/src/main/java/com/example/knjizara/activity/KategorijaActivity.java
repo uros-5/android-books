@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.KnjizaraInfo;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 public class KategorijaActivity extends AppCompatActivity {
 
     public KnjizaraInfo knjizaraInfo;
+
+    public Klijent klijent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +35,13 @@ public class KategorijaActivity extends AppCompatActivity {
 
         knjizaraInfo = new KnjizaraInfo(this);
 
+        klijent = new Klijent();
+
         Intent intent = getIntent();
         String kategorija = intent.getStringExtra("Kategorija");
         this.setTitle("KNJIZARA - "+ kategorija);
-        ArrayList<Knjiga> niz = knjizaraInfo.getBooksCategory(kategorija);
+
+        ArrayList<ArrayList> niz = klijent.sendM("kategorija "+kategorija);
         knjizaraInfo.initKategorijaRV(niz);
 
     }

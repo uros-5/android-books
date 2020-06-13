@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.fragments.Tab3;
 import com.example.knjizara.model.Knjiga;
@@ -24,12 +25,14 @@ import java.util.ArrayList;
 
 public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdapter.ViewHolder> {
 
-    ArrayList<Knjiga> niz0 = new ArrayList<>();
+    ArrayList<String> niz0 = new ArrayList<>();
     private static final String TAG = "DetailKorpaRVAdapter";
     public Context context;
     public Tab3 korpaActivity;
+    Klijent klijent;
+    ArrayList<ArrayList> knjiga;
 
-    public DetailKorpaRVAdapter(Fragment context, ArrayList<Knjiga> niz0) {
+    public DetailKorpaRVAdapter(Fragment context, ArrayList<String> niz0) {
         this.context = context.getContext();
         korpaActivity = (Tab3) ((Fragment) context);
         this.niz0 = niz0;
@@ -39,9 +42,13 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
     @Override
     public void onBindViewHolder(@NonNull final DetailKorpaRVAdapter.ViewHolder holder, final int position) {
 
-        String naslov = niz0.get(position).getNaslov();
+        klijent = new Klijent();
 
-        String cena = niz0.get(position).getCena();
+        knjiga = klijent.sendM("id "+ niz0.get(position).toString());
+
+        String naslov = knjiga.get(0).get(1).toString();
+
+        String cena = knjiga.get(0).get(2).toString();
         if(!cena.startsWith("Bespl")) {
             cena+=" RSD";
         }
@@ -57,7 +64,7 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
         holder.brisanjeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Knjiga knjiga = niz0.get(position);
+                String knjiga = niz0.get(position);
                 korpaActivity.obrisiIzKorpe(knjiga);
                 if(v.equals(holder.brisanjeBtn)) {
                     niz0.remove(position);
@@ -72,7 +79,7 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
 
             }
         });
-        String fajl = niz0.get(position).getIsbn()+".jpg";
+        String fajl = knjiga.get(0).get(0).toString()+".jpg";
         holder.setSlika(fajl);
 
 

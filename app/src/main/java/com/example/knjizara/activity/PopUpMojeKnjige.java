@@ -7,9 +7,12 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
+import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.MojeKnjigeSP;
 
 import java.text.DecimalFormat;
@@ -22,6 +25,10 @@ public class PopUpMojeKnjige extends AppCompatActivity {
 public LinearLayout mainLayout;
 
     public MojeKnjigeSP mojeKnjigeSP;
+
+    public ArrayList<ArrayList> lista;
+    public Klijent klijent;
+    public KorisnikSP korisnikSP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,25 +41,34 @@ public LinearLayout mainLayout;
         getWindow().setLayout((int)(width*.7),(int)(height*.7));
 
         mainLayout = (LinearLayout) findViewById(R.id.mojeKnjigePopUp);
-        mojeKnjigeSP = new MojeKnjigeSP(this);
         besplatneCount = (TextView) findViewById(R.id.besplatneCount);
         placeneCount = (TextView) findViewById(R.id.placeneCount);
         ukupnoView = (TextView) findViewById(R.id.ukupno22);
-        setViews();
-
+        klijent = new Klijent();
+        korisnikSP = new KorisnikSP(this);
+        if(korisnikSP.isNull())
+            setViews();
+        else
+            Toast.makeText(this,"Ulogujte se",Toast.LENGTH_LONG).show();
     }
     public void setViews() {
-        ArrayList<Knjiga> mojeKnjige = mojeKnjigeSP.getMojeKnjige();
+        //upit za moje knjige
+
+//        ArrayList<Knjiga> mojeKnjige = mojeKnjigeSP.getMojeKnjige();
+        lista = klijent.sendM("mojeKnjige "+korisnikSP.getKorisnik().toString());
+
+
         double ukupno = 0.0;
         int besplatne = 0;
         int placene = 0;
-        for (Knjiga knjiga:mojeKnjige) {
-            if(knjiga.getCena().startsWith("Bespl")) {
+        for (ArrayList<String> clan: lista) {
+            String cena = clan.get(2).toString();
+            if(cena.startsWith("Bespl")) {
                 besplatne++;
                 continue;
             }
             else {
-                ukupno += Double.parseDouble(knjiga.getCena());
+                ukupno += Double.parseDouble(cena);
                 placene++;
             }
         }

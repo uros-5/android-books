@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.knjizara.Klijent;
 import com.example.knjizara.NotificationHelper;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.TopLevelRVAdapter;
-import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.model.Korisnik;
 import com.example.knjizara.viewmodel.KnjizaraInfo;
 import com.example.knjizara.viewmodel.KorisnikSP;
@@ -30,24 +30,34 @@ import java.util.ArrayList;
 public class Tab1 extends Fragment {
     View rootView;
     KnjizaraInfo knjizaraInfo;
-    ArrayList<Knjiga> niz0 = new ArrayList<>();
-    ArrayList<Knjiga> niz1 = new ArrayList<>();
-    ArrayList<Knjiga> hronoloskaLista;
+
+    //klijent
+    Klijent klijent;
+    //mysql data
+    ArrayList<ArrayList> niz00 = new ArrayList<>();
+    ArrayList<ArrayList> niz11 = new ArrayList<>();
+    ArrayList<ArrayList> hronoloskaLista2 = new ArrayList<>();
+
     Gson gson;
     SharedPreferences pref;
     SharedPreferences.Editor prefsEditor;
     public final String CHANNEL_ID = "PlacanjeActivity";
     public int NOTIFICATION_ID = 001;
     NotificationHelper notificationHelper;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_tab1, container, false);
         knjizaraInfo = new KnjizaraInfo(getActivity());
-        niz0 = knjizaraInfo.getNiz(0);
-        niz1 = knjizaraInfo.getNiz(1);
-        hronoloskaLista = knjizaraInfo.mixBooks();
+
+        Klijent klijent = new Klijent();
+
+        niz00 = klijent.sendM("najpKnjige");
+        niz11 = klijent.sendM("besplKnjige");
+        hronoloskaLista2 = klijent.sendM("hronLista");
+
         notificationHelper = new NotificationHelper(getContext());
 
 
@@ -70,9 +80,34 @@ public class Tab1 extends Fragment {
 
 
         LinearLayout najpKnjige = rootView.findViewById(R.id.najpopularnijeKnjige);
-        initRecyclerView("popularne");
-        initRecyclerView("besplatne");
-        initRecyclerView("hronoloskaLista");
+        Runnable runnablePopularne = new Runnable() {
+            @Override
+            public void run() {
+                initRecyclerView("popularne");
+            };
+        };
+        Thread threadPopularne = new Thread(runnablePopularne);
+        threadPopularne.start();
+
+        Runnable runnableBesplatne = new Runnable() {
+            @Override
+            public void run() {
+                initRecyclerView("besplatne");
+            };
+        };
+        Thread threadBesplatne= new Thread(runnableBesplatne);
+        threadBesplatne.start();
+
+        Runnable runnableHronoloska = new Runnable() {
+            @Override
+            public void run() {
+                initRecyclerView("hronoloskaLista");
+            };
+        };
+        Thread threadHronoloska = new Thread(runnableHronoloska);
+        threadHronoloska.start();
+
+
         return rootView;
     }
 
@@ -80,17 +115,18 @@ public class Tab1 extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         if(kat == "popularne") {
             RecyclerView recyclerView = rootView.findViewById(R.id.najpopularnijeKnjige0);
-
             recyclerView.setLayoutManager(layoutManager);
-            TopLevelRVAdapter adapter = new TopLevelRVAdapter(getActivity(),niz0);
+            TopLevelRVAdapter adapter = new TopLevelRVAdapter(getActivity(),niz00);
             recyclerView.setAdapter(adapter);
+            layoutManager.smoothScrollToPosition(recyclerView,new RecyclerView.State(), recyclerView.getAdapter().getItemCount());
         }
         else if (kat == "besplatne") {
 
             RecyclerView recyclerView = rootView.findViewById(R.id.besplatneKnjige0);
             recyclerView.setLayoutManager(layoutManager);
-            TopLevelRVAdapter adapter = new TopLevelRVAdapter(getActivity(),niz1);
+            TopLevelRVAdapter adapter = new TopLevelRVAdapter(getActivity(),niz11);
             recyclerView.setAdapter(adapter);
+            layoutManager.smoothScrollToPosition(recyclerView,new RecyclerView.State(), recyclerView.getAdapter().getItemCount());
         }
         else if (kat == "hronoloskaLista") {
 
@@ -98,8 +134,8 @@ public class Tab1 extends Fragment {
             RecyclerView recyclerView = rootView.findViewById(R.id.hronoloskaLista0);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(gridLayoutManager);
-            TopLevelRVAdapter adapter = new TopLevelRVAdapter(getActivity(),hronoloskaLista);
-            adapter.setDuzina(hronoloskaLista.size());
+            TopLevelRVAdapter adapter = new TopLevelRVAdapter(getActivity(),hronoloskaLista2);
+            adapter.setDuzina(hronoloskaLista2.size());
             recyclerView.setAdapter(adapter);
             recyclerView.setNestedScrollingEnabled(false);
         }
@@ -108,16 +144,13 @@ public class Tab1 extends Fragment {
     public void initAppData() {
 
         Korisnik korisnik = new Korisnik();
-        ArrayList<Knjiga> korpa = new ArrayList<Knjiga>();
-        ArrayList<Knjiga> mojeKnjige = new ArrayList<Knjiga>();
+        ArrayList<String> korpa = new ArrayList<String>();
 
         String jsonKorisnik = gson.toJson(korisnik);
         String jsonKorpa = gson.toJson(korpa);
-        String jsonMojeKnjige = gson.toJson(mojeKnjige);
 
         prefsEditor.putString("korisnik",jsonKorisnik);
         prefsEditor.putString("korpa",jsonKorpa);
-        prefsEditor.putString("mojeKnjige",jsonMojeKnjige);
         prefsEditor.putBoolean("korisnikBack",false);
         prefsEditor.putInt("currentTab",0);
 
@@ -126,7 +159,7 @@ public class Tab1 extends Fragment {
     }
 
     public boolean isInitAppDataDone () {
-        if(pref.contains("korisnik") && pref.contains("korpa") && pref.contains("mojeKnjige")) {
+        if(pref.contains("korisnik") && pref.contains("korpa")) {
             return true;
         }
         return false;
@@ -143,4 +176,10 @@ public class Tab1 extends Fragment {
         }
         korisnikSP = null;
     }
+//    public void exitApp () {
+//
+//        this.getActivity().finishAffinity();
+//        System.exit(0);
+//
+//    }
 }

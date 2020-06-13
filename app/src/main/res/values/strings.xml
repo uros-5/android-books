@@ -25,6 +25,7 @@
     <string name="dalje">DALJE</string>
     <string name="nazad">NAZAD</string>
     <string name="emailHint">Email</string>
+    <string name="usernameHint2">username</string>
     <string name="passwordHint">Password</string>
     <string name="login">PRIJAVI SE</string>
     <string name="register">REGISTRUJ SE</string>

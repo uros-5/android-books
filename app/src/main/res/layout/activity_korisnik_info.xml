@@ -50,6 +50,17 @@
                 android:textSize="20sp"></EditText>
 
             <EditText
+                android:id="@+id/usernameEdit"
+                android:inputType="textPersonName|textCapWords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:hint="username"
+                android:textSize="20sp"></EditText>
+
+            <EditText
                 android:id="@+id/ulicaIBrojEdit"
                 android:inputType="textCapWords"
                 android:layout_width="match_parent"

@@ -9,16 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
 
 import java.util.ArrayList;
 
 public class PlacanjeRVAdapter extends RecyclerView.Adapter<PlacanjeRVAdapter.ViewHolder> {
-    ArrayList<Knjiga> niz0 = new ArrayList<>();
+    ArrayList<String> niz0 = new ArrayList<>();
+    ArrayList<ArrayList> knjiga;
+    Klijent klijent;
+
+
     private static final String TAG = "PlacanjeRVAdapter";
 
-    public PlacanjeRVAdapter(Context context, ArrayList<Knjiga> niz0) {
+    public PlacanjeRVAdapter(Context context, ArrayList<String> niz0) {
         this.niz0 = niz0;
 
     }
@@ -33,9 +38,14 @@ public class PlacanjeRVAdapter extends RecyclerView.Adapter<PlacanjeRVAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull PlacanjeRVAdapter.ViewHolder holder, final int position) {
 
-        String naslov = niz0.get(position).getNaslov();
 
-        String cena = niz0.get(position).getCena();
+        klijent = new Klijent();
+
+        knjiga = klijent.sendM("id "+niz0.get(position).toString());
+
+        String naslov = knjiga.get(0).get(1).toString();
+
+        String cena = knjiga.get(0).get(2).toString();
 
         holder.naslov.setText(naslov);
         holder.cena.setText(cena);

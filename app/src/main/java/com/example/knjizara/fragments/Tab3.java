@@ -19,6 +19,7 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.knjizara.R;
 import com.example.knjizara.activity.PlacanjeActivity;
 import com.example.knjizara.adapter.DetailKorpaRVAdapter;
+import com.example.knjizara.adapter.PagerAdapter;
 import com.example.knjizara.interfaces.FragmentStartListener;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.KorisnikSP;
@@ -41,7 +42,9 @@ public class Tab3 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_tab3, container, false);
-        korpaSP = new KorpaSP(container.getContext());
+
+        korpaSP = new KorpaSP(getActivity());
+//        korpaSP.sendTab3(this);
         initRecyclerView();
         korpaSP.setStanje(rootView);
         korisnikSP = new KorisnikSP(getActivity());
@@ -57,7 +60,7 @@ public class Tab3 extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
-    public void obrisiIzKorpe (Knjiga knjiga) {
+    public void obrisiIzKorpe (String knjiga) {
         korpaSP.obrisi(knjiga);
         Parcelable recyclerViewState;
         recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
@@ -90,9 +93,7 @@ public class Tab3 extends Fragment {
 
     }
 
-    public void setListenerKorpa(ListenerKorpa listenerKorpa) {
-        this.listenerKorpa = listenerKorpa;
-    }
+
 
     public void updateTab() {
         azurirajStanjeKorpe();

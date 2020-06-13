@@ -23,12 +23,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapter.ViewHolder> {
-    ArrayList<Knjiga> niz0 = new ArrayList<>();
+    ArrayList<ArrayList> niz0 = new ArrayList<>();
     private static final String TAG = "MojeKnjigeRVAdapter";
     public Context context;
 
 
-    public MojeKnjigeRVAdapter(Context context, ArrayList<Knjiga> niz0) {
+    public MojeKnjigeRVAdapter(Context context, ArrayList<ArrayList> niz0) {
         this.context = context;
         this.niz0 = niz0;
 
@@ -44,19 +44,19 @@ public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        String naslov = niz0.get(position).getNaslov();
+        String naslov = niz0.get(position).get(1).toString();
 
         holder.naslov.setText(naslov);
-        holder.autor.setText(niz0.get(position).getAutor());
+        holder.autor.setText(niz0.get(position).get(3).toString());
         holder.cena.setText("");
         holder.slika2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Knjiga knjiga = niz0.get(position);
-                Toast.makeText(v.getContext(),""+knjiga.getNaslov(),Toast.LENGTH_LONG).show();
+                String knjiga = niz0.get(position).get(1).toString();
+                Toast.makeText(v.getContext(),""+knjiga,Toast.LENGTH_LONG).show();
             }
         });
-        String fajl = niz0.get(position).getIsbn()+".jpg";
+        String fajl = niz0.get(position).get(0).toString()+".jpg";
         holder.setSlika(fajl);
 
 

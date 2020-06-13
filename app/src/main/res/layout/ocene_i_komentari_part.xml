@@ -90,4 +90,16 @@
         android:text="@string/komentarBtn"
         android:textColor="@color/textColorPrimary"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:elevation="1dp"
+        android:id="@+id/komentariZaKnjige"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="7dp"
+        android:background="@drawable/komentari_bg">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 </LinearLayout>

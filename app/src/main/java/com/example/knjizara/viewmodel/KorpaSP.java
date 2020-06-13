@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
+import com.example.knjizara.adapter.PagerAdapter;
 import com.example.knjizara.fragments.Tab3;
 import com.example.knjizara.model.Knjiga;
 import com.google.gson.Gson;
@@ -27,18 +29,17 @@ public class KorpaSP {
     SharedPreferences pref;
     SharedPreferences.Editor prefsEditor;
     Context context;
+    Klijent klijent;
 
-    public KorpaSP (Context context) {
-        this.context = context;
-        pref = context.getSharedPreferences("com.example.knjizara", MODE_PRIVATE);
-
-        prefsEditor = pref.edit();
-
-        gson = new Gson();
+    public KorpaSP (Activity context) {
+        setAll(context);
     }
-    public ArrayList<Knjiga> getKorpa() {
+    public KorpaSP() {
+
+    }
+    public ArrayList<String> getKorpa() {
         String json = pref.getString("korpa","");
-        ArrayList<Knjiga> korpa = gson.fromJson(json,new TypeToken<ArrayList<Knjiga>>(){}.getType());
+        ArrayList<String> korpa = gson.fromJson(json,new TypeToken<ArrayList<String>>(){}.getType());
         return korpa;
     }
 
@@ -46,11 +47,23 @@ public class KorpaSP {
         return getKorpa().size();
     }
 
-    public void dodaj(Knjiga knjiga) {
-        ArrayList<Knjiga> korpa = getKorpa();
-        boolean provera = proveri(knjiga);
+    public void setAll(Context context) {
+        this.context = context;
+
+        pref = context.getSharedPreferences("com.example.knjizara", MODE_PRIVATE);
+
+        prefsEditor = pref.edit();
+
+        gson = new Gson();
+
+        klijent = new Klijent();
+    }
+
+    public void dodaj(String id) {
+        ArrayList<String> korpa = getKorpa();
+        boolean provera = proveri(id);
         if(provera==false) {
-            korpa.add(knjiga);
+            korpa.add(id);
             setAray(korpa);
             Toast.makeText(context,"Knjiga je dodata.",Toast.LENGTH_LONG).show();
         }
@@ -60,11 +73,11 @@ public class KorpaSP {
 
     }
 
-    public void obrisi(Knjiga knjiga) {
-        ArrayList<Knjiga> korpa = getKorpa();
-        boolean provera = proveri(knjiga);
+    public void obrisi(String id) {
+        ArrayList<String> korpa = getKorpa();
+        boolean provera = proveri(id);
         if(provera==true) {
-            korpa.remove(knjiga);
+            korpa.remove(id);
             setAray(korpa);
         }
         else {
@@ -74,22 +87,24 @@ public class KorpaSP {
     }
 
     public double getUkupnaCenaKnjiga() {
-        ArrayList<Knjiga> korpa = getKorpa();
+        ArrayList<String> korpa = getKorpa();
         double ukupno = 0.00;
-        for (Knjiga knjiga:korpa) {
-            if(!knjiga.getCena().startsWith("Besplatno")) {
-                ukupno+= Double.parseDouble(knjiga.getCena());
+        for (String knjiga:korpa) {
+            ArrayList<ArrayList> knjigaInfo = klijent.sendM("id "+knjiga);
+            String cena = knjigaInfo.get(0).get(2).toString();
+            if(!cena.startsWith("Besplatno")) {
+                ukupno+= Double.parseDouble(cena);
             }
         }
         DecimalFormat df = new DecimalFormat("0.00");
         return Double.parseDouble(df.format(ukupno));
     }
 
-    public void setAray (ArrayList<Knjiga> niz) {
+    public void setAray (ArrayList<String> niz) {
         String jsonKorpa = "";
-        ArrayList<Knjiga> korpa;
+        ArrayList<String> korpa;
         if(niz == null) {
-            korpa = new ArrayList<Knjiga>();
+            korpa = new ArrayList<String>();
             jsonKorpa = gson.toJson(korpa);
 
         }
@@ -99,11 +114,14 @@ public class KorpaSP {
         }
         prefsEditor.putString("korpa",jsonKorpa);
         prefsEditor.apply();
+        //azuriraj adapter
+
+
     }
 
-    public boolean proveri (Knjiga knjiga) {
-        ArrayList<Knjiga> korpa = getKorpa();
-        if(korpa.contains(knjiga)) {
+    public boolean proveri (String isbn) {
+        ArrayList<String> korpa = getKorpa();
+        if(korpa.contains(isbn)) {
             return true;
         }
         return false;
