@@ -87,11 +87,15 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void onRestart() {
         super.onRestart();
+        // ako je true onda je postavljen i postoji i njegov id i sve
         if(korisnikSP.isNull()) {
             currentTabSP.setCT(4);
            onBackPressed();
             Animatoo.animateSlideUp(this);
         }
+//        else{
+//            currentTabSP.setCT(44);
+//        }
 
     }
 }

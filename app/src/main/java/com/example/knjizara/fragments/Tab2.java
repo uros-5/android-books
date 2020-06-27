@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.adapter.MojeKnjigeRVAdapter;
+import com.example.knjizara.model.Korisnik;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.ListenerMojeKnjige;
 import com.example.knjizara.viewmodel.MojeKnjigeSP;
@@ -81,6 +82,7 @@ public class Tab2 extends Fragment {
     }
     public void updateTab() {
         try {
+            this.setNewKorisnikSP();
             if(userId != null || userId != "") {
                 userId = korisnikSP.getKorisnik().toString();
                 lista = klijent.sendM("mojeKnjige " + userId);
@@ -96,4 +98,20 @@ public class Tab2 extends Fragment {
 
 
     }
+
+    public void setNewKorisnikSP() {
+        try{
+            korisnikSP = new KorisnikSP(getActivity());
+            Korisnik obj = korisnikSP.getKorisnik();
+            korisnikSP.setKorisnik(obj);
+            userId = obj.toString();
+        }
+        catch (Exception e) {
+
+        }
+
+
+    }
+
+
 }

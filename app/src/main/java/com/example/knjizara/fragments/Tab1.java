@@ -176,6 +176,7 @@ public class Tab1 extends Fragment {
         }
         korisnikSP = null;
     }
+
 //    public void exitApp () {
 //
 //        this.getActivity().finishAffinity();

@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRestart() {
+        System.out.println("nesto "+currentTabSP.getCT());
         super.onRestart();
         if(currentTabSP.getCT()==2) {
             Handler handlerUpdate = new Handler();
@@ -110,10 +111,13 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(currentTabSP.getCT()==0) {
             pagerAdapter.updateTab3();
+            currentTabSP.setCT(5);
         }
         else if(currentTabSP.getCT() == 4) {
             pagerAdapter.updateTab2();
+            currentTabSP.setCT(100);
         }
+
     }
 
     public void onPause() {

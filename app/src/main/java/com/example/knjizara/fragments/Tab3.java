@@ -22,6 +22,7 @@ import com.example.knjizara.adapter.DetailKorpaRVAdapter;
 import com.example.knjizara.adapter.PagerAdapter;
 import com.example.knjizara.interfaces.FragmentStartListener;
 import com.example.knjizara.model.Knjiga;
+import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 import com.example.knjizara.viewmodel.ListenerKorpa;
@@ -49,6 +50,7 @@ public class Tab3 extends Fragment {
         korpaSP.setStanje(rootView);
         korisnikSP = new KorisnikSP(getActivity());
         setListenerZavrsi();
+
         return rootView;
     }
     public void initRecyclerView () {

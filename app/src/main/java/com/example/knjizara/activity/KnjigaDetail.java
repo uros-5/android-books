@@ -22,6 +22,7 @@ import com.example.knjizara.R;
 import com.example.knjizara.adapter.KomentariAdapter;
 import com.example.knjizara.adapter.TopLevelRVAdapter;
 import com.example.knjizara.model.Knjiga;
+import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +44,8 @@ public class KnjigaDetail  extends AppCompatActivity {
     public KorpaSP korpaSP;
 
     ArrayList<ArrayList> niz00;
+
+    CurrentTabSP currentTabSP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class KnjigaDetail  extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         this.isbn = knjiga.get(0).get(0).toString();
+        currentTabSP = new CurrentTabSP(this);
 
         try {
             String naslov = getSupportActionBar().getTitle().toString();
@@ -137,6 +141,7 @@ public class KnjigaDetail  extends AppCompatActivity {
         Animatoo.animateSwipeRight(this);
     }
     public void onPause() {
+        currentTabSP.setCT(0);
         finish();
         super.onPause();
     }
