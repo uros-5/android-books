@@ -1,6 +1,3 @@
-# Klijent-server aplikacija - domaci2
-Da bi funkcionisala komunikacija izmedju servera i aplikacije premestite ibd fajlove u C:\ProgramData\MySQL\MySQL Server 8.0\Data\knjizara2.Server.java se moze nalaziti bilo gde.Samo promenite sifru i username.
-
 # Offline aplikacija - domaci1
 Da bi smo pokrenuli aplikaciju na nasem uredjaju moramo imati minimum Android 8.0(ili vise).
 ```

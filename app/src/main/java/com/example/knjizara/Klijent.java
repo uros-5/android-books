@@ -242,6 +242,15 @@ public class Klijent {
                 zatvoriSocket();
                 return lista;
             }
+            else if(poruka.startsWith("koMentarisi")) {
+                sendM0(poruka);
+
+                setLista();
+
+                zatvoriSocket();
+
+                return lista;
+            }
             
             
         }

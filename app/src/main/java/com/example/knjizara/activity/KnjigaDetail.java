@@ -23,6 +23,7 @@ import com.example.knjizara.adapter.KomentariAdapter;
 import com.example.knjizara.adapter.TopLevelRVAdapter;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.CurrentTabSP;
+import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 import com.squareup.picasso.Picasso;
 
@@ -46,6 +47,9 @@ public class KnjigaDetail  extends AppCompatActivity {
     ArrayList<ArrayList> niz00;
 
     CurrentTabSP currentTabSP;
+
+    public KorisnikSP korisnikSP;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class KnjigaDetail  extends AppCompatActivity {
 
         this.isbn = knjiga.get(0).get(0).toString();
         currentTabSP = new CurrentTabSP(this);
+        korisnikSP = new KorisnikSP(this);
 
         try {
             String naslov = getSupportActionBar().getTitle().toString();
@@ -147,7 +152,26 @@ public class KnjigaDetail  extends AppCompatActivity {
     }
 
     public void postComment(View view) {
-        Toast.makeText(this,"U sledecoj verziji.",Toast.LENGTH_LONG).show();
+        TextView textView3 = this.findViewById(R.id.editText3);
+        String komentar = textView3.getText().toString();
+        String korisnikID = korisnikSP.getKorisnik().id;
+
+
+        int duzinaKomentara = komentar.length();
+        if(duzinaKomentara>0 && duzinaKomentara < 150) {
+            String porukaZaServer = String.format("koMentarisi %s %s komentar:%s",id,korisnikID,komentar);
+            klijent.sendM(porukaZaServer);
+            Toast.makeText(this,"Komentar ceka na odobrenje.",Toast.LENGTH_LONG).show();
+            textView3.setText("");
+        }
+        else if(duzinaKomentara>150) {
+            Toast.makeText(this,"Komentar je predugacak.",Toast.LENGTH_LONG).show();
+        }
+        else if(duzinaKomentara==0) {
+            Toast.makeText(this,"Unesite komentar..",Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
     public void initRVKomentari() {
