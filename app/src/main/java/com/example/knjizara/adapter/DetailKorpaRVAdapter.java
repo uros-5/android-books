@@ -20,6 +20,8 @@ import com.example.knjizara.fragments.Tab3;
 import com.example.knjizara.model.Knjiga;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -30,7 +32,7 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
     public Context context;
     public Tab3 korpaActivity;
     Klijent klijent;
-    ArrayList<ArrayList> knjiga;
+    JSONArray knjiga;
 
     public DetailKorpaRVAdapter(Fragment context, ArrayList<String> niz0) {
         this.context = context.getContext();
@@ -42,45 +44,64 @@ public class DetailKorpaRVAdapter extends RecyclerView.Adapter<DetailKorpaRVAdap
     @Override
     public void onBindViewHolder(@NonNull final DetailKorpaRVAdapter.ViewHolder holder, final int position) {
 
-        klijent = new Klijent();
+        try {
+//        knjiga.getJSONArray(0).get(0).toString());
+            klijent = new Klijent();
 
-        knjiga = klijent.sendM("id "+ niz0.get(position).toString());
+            knjiga = klijent.sendM("id "+niz0.get(position).toString());
 
-        String naslov = knjiga.get(0).get(1).toString();
+            String naslov = knjiga.getJSONArray(0).get(1).toString();
 
-        String cena = knjiga.get(0).get(2).toString();
-        if(!cena.startsWith("Bespl")) {
-            cena+=" RSD";
-        }
-        holder.naslov.setText(naslov);
-        holder.cena.setText(cena);
-        holder.layoutKorpa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Log.d(TAG,"isbn");
+            String cena = String.valueOf(knjiga.getJSONArray(0).get(3)).toString();
+            if(!cena.startsWith("Bespl")) {
+                cena+=" RSD";
             }
-        });
-        holder.brisanjeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String knjiga = niz0.get(position);
-                korpaActivity.obrisiIzKorpe(knjiga);
-                if(v.equals(holder.brisanjeBtn)) {
-                    niz0.remove(position);
-                    notifyItemRemoved(holder.getAdapterPosition());
-                    notifyItemRangeChanged(holder.getAdapterPosition(),niz0.size());
-                    if (niz0.size() == 1) {
-                        notifyDataSetChanged();
+            holder.naslov.setText(naslov);
+            holder.cena.setText(cena);
+            holder.layoutKorpa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Log.d(TAG,"isbn");
+                }
+            });
+            holder.brisanjeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    try {
+                        String knjiga2 = knjiga.getJSONArray(0).get(0).toString();
+                        korpaActivity.obrisiIzKorpe(knjiga2);
+                        if(v.equals(holder.brisanjeBtn)) {
+                            niz0.remove(position);
+                            notifyItemRemoved(holder.getAdapterPosition());
+                            notifyItemRangeChanged(holder.getAdapterPosition(),niz0.size());
+                            if (niz0.size() == 1) {
+                                notifyDataSetChanged();
+                            }
+                            korpaActivity.azurirajStanjeKorpe();
+
+                        }
                     }
-                    korpaActivity.azurirajStanjeKorpe();
+                    catch (Exception e) {
+
+                    }
+
+
+
 
                 }
+            });
 
-            }
-        });
-        String fajl = knjiga.get(0).get(0).toString()+".jpg";
-        holder.setSlika(fajl);
+            String fajl = knjiga.getJSONArray(0).get(5).toString()+".jpg";
+            holder.setSlika(fajl);
+
+
+        }
+        catch (Exception e) {
+
+        }
+
 
 
     }

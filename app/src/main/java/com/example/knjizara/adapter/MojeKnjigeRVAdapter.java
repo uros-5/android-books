@@ -19,16 +19,18 @@ import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapter.ViewHolder> {
-    ArrayList<ArrayList> niz0 = new ArrayList<>();
+    JSONArray niz0;
     private static final String TAG = "MojeKnjigeRVAdapter";
     public Context context;
 
 
-    public MojeKnjigeRVAdapter(Context context, ArrayList<ArrayList> niz0) {
+    public MojeKnjigeRVAdapter(Context context, JSONArray niz0) {
         this.context = context;
         this.niz0 = niz0;
 
@@ -43,28 +45,49 @@ public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        try {
+            String naslov = niz0.getJSONArray(position).get(3).toString();
 
-        String naslov = niz0.get(position).get(1).toString();
+            holder.naslov.setText(naslov);
+            holder.autor.setText(niz0.getJSONArray(position).get(4).toString());
+            holder.cena.setText("");
 
-        holder.naslov.setText(naslov);
-        holder.autor.setText(niz0.get(position).get(3).toString());
-        holder.cena.setText("");
-        holder.slika2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String knjiga = niz0.get(position).get(1).toString();
-                Toast.makeText(v.getContext(),""+knjiga,Toast.LENGTH_LONG).show();
-            }
-        });
-        String fajl = niz0.get(position).get(0).toString()+".jpg";
-        holder.setSlika(fajl);
+            holder.slika2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        String knjiga = niz0.getJSONArray(position).get(1).toString();
+                        Toast.makeText(v.getContext(),""+knjiga,Toast.LENGTH_LONG).show();
+                    }
+                    catch (Exception e) {
+
+                    }
+
+                }
+            });
+
+
+
+            String fajl = niz0.getJSONArray(position).get(1).toString()+".jpg";
+            holder.setSlika(fajl);
+
+
+        }
+        catch (Exception e) {
+
+        }
+
+
 
 
     }
 
+
+
+
     @Override
     public int getItemCount() {
-        return niz0.size();
+        return niz0.length();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -88,7 +111,14 @@ public class MojeKnjigeRVAdapter extends RecyclerView.Adapter<MojeKnjigeRVAdapte
         }
         public void setSlika(String fajl) {
             File fileName = new File(context.getFilesDir().getAbsolutePath()+"/slike_knjiga/"+fajl);
-            Picasso.get().load(fileName).into(slika);
+            if(!fileName.exists()) {
+                File fileName2 = new File(context.getFilesDir().getAbsolutePath()+"/slike_knjiga/"+"noBook.png");
+                Picasso.get().load(fileName2).into(slika);
+            }
+            else {
+                Picasso.get().load(fileName).into(slika);
+            }
+
         }
     }
 }

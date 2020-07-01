@@ -27,6 +27,9 @@ import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -40,11 +43,11 @@ public class KnjigaDetail  extends AppCompatActivity {
     public String id;
     public Klijent klijent;
 
-    ArrayList<ArrayList> knjiga;
+    JSONArray knjiga;
 
     public KorpaSP korpaSP;
 
-    ArrayList<ArrayList> niz00;
+    JSONArray niz00;
 
     CurrentTabSP currentTabSP;
 
@@ -73,13 +76,44 @@ public class KnjigaDetail  extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        this.isbn = knjiga.get(0).get(0).toString();
-        currentTabSP = new CurrentTabSP(this);
-        korisnikSP = new KorisnikSP(this);
+
 
         try {
+
+            this.isbn = knjiga.getJSONArray(0).get(5).toString();
+            currentTabSP = new CurrentTabSP(this);
+            korisnikSP = new KorisnikSP(this);
+
+
             String naslov = getSupportActionBar().getTitle().toString();
-            getSupportActionBar().setTitle(naslov + " "+knjiga.get(0).get(1).toString());
+            getSupportActionBar().setTitle(naslov + " "+knjiga.getJSONArray(0).get(1).toString());
+
+            TextView naslovView = (TextView) findViewById(R.id.naslovKnjige);
+            naslovView.setText(knjiga.getJSONArray(0).get(1).toString());
+
+            TextView autorView = (TextView) findViewById(R.id.autorKnjige);
+            autorView.setText(knjiga.getJSONArray(0).get(7).toString());
+
+            Button kategorijaView = (Button) findViewById(R.id.kategorijaKnjige);
+            kategorijaView.setText(knjiga.getJSONArray(0).get(6).toString());
+
+            TextView cenaView = (TextView) findViewById(R.id.cenaKnjige);
+            cenaView.setText("Cena knjige: "+String.valueOf(knjiga.getJSONArray(0).get(3).toString()));
+
+
+            TextView izdavacView = (TextView) findViewById(R.id.textView4);
+            izdavacView.setText("IZDAVAC: "+knjiga.getJSONArray(0).get(8).toString());
+
+            ImageView imageView = (ImageView) findViewById(R.id.imageView);
+
+
+
+            String fajl = this.isbn+".jpg";
+            setSlika(imageView,fajl);
+
+            initRVKomentari();
+
+
 
         } catch (Exception e) {
 
@@ -87,30 +121,7 @@ public class KnjigaDetail  extends AppCompatActivity {
         }
 
 
-        TextView naslovView = (TextView) findViewById(R.id.naslovKnjige);
-        naslovView.setText(knjiga.get(0).get(1).toString());
 
-        TextView autorView = (TextView) findViewById(R.id.autorKnjige);
-        autorView.setText(knjiga.get(0).get(3).toString());
-
-        Button kategorijaView = (Button) findViewById(R.id.kategorijaKnjige);
-        kategorijaView.setText(knjiga.get(0).get(6).toString());
-
-        TextView cenaView = (TextView) findViewById(R.id.cenaKnjige);
-        cenaView.setText("Cena knjige: "+knjiga.get(0).get(2).toString());
-
-
-        TextView izdavacView = (TextView) findViewById(R.id.textView4);
-        izdavacView.setText("IZDAVAC: "+knjiga.get(0).get(7).toString());
-
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-
-
-
-        String fajl = this.isbn+".jpg";
-        setSlika(imageView,fajl);
-
-        initRVKomentari();
     }
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
@@ -138,7 +149,11 @@ public class KnjigaDetail  extends AppCompatActivity {
 
     public void vidiKategoriju (View view) {
         Intent intent = new Intent(KnjigaDetail.this,KategorijaActivity.class);
-        intent.putExtra("Kategorija", knjiga.get(0).get(6).toString());
+        try {
+            intent.putExtra("Kategorija", knjiga.getJSONArray(0).get(6).toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         startActivity(intent);
     }
     public void onBackPressed() {

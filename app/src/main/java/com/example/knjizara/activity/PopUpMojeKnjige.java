@@ -15,6 +15,9 @@ import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.MojeKnjigeSP;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -26,7 +29,7 @@ public LinearLayout mainLayout;
 
     public MojeKnjigeSP mojeKnjigeSP;
 
-    public ArrayList<ArrayList> lista;
+    public JSONArray lista;
     public Klijent klijent;
     public KorisnikSP korisnikSP;
     @Override
@@ -61,9 +64,16 @@ public LinearLayout mainLayout;
         double ukupno = 0.0;
         int besplatne = 0;
         int placene = 0;
-        for (ArrayList<String> clan: lista) {
-            String cena = clan.get(2).toString();
-            if(cena.startsWith("Bespl")) {
+
+        for(int j=0;j<lista.length();j++) {
+            String cena = null;
+            try {
+                cena = String.valueOf(lista.getJSONArray(j).get(5)).toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+//                    System.out.println(jArray.getJSONArray(0).get(j));
+            if(cena.startsWith("0")) {
                 besplatne++;
                 continue;
             }

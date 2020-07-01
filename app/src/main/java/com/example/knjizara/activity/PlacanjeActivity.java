@@ -23,6 +23,8 @@ import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.KorpaSP;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class PlacanjeActivity extends AppCompatActivity {
@@ -102,9 +104,6 @@ public class PlacanjeActivity extends AppCompatActivity {
                 for (String string:niz0) {
                     request+=string+" ";
                 }
-                ArrayList<ArrayList> lista = klijent.sendM("countNarudzbine");
-                String idNarudzbine = lista.get(0).get(0).toString();
-                request+=idNarudzbine+" ";
                 request+=korisnikSP.getKorisnik().toString();
                 klijent.sendM(request);
                 korpaSP.setAray(null);

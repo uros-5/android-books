@@ -14,6 +14,8 @@ import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
 import com.example.knjizara.viewmodel.KnjizaraInfo;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class KategorijaActivity extends AppCompatActivity {
@@ -41,7 +43,7 @@ public class KategorijaActivity extends AppCompatActivity {
         String kategorija = intent.getStringExtra("Kategorija");
         this.setTitle("KNJIZARA - "+ kategorija);
 
-        ArrayList<ArrayList> niz = klijent.sendM("kategorija "+kategorija);
+        JSONArray niz = klijent.sendM("kategorija "+kategorija);
         knjizaraInfo.initKategorijaRV(niz);
 
     }

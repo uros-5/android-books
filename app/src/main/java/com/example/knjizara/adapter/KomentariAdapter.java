@@ -15,11 +15,13 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.knjizara.activity.KnjigaDetail;
 import com.example.knjizara.R;
 
+import org.json.JSONArray;
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class KomentariAdapter extends RecyclerView.Adapter<KomentariAdapter.ViewHolder> {
-    ArrayList<ArrayList> niz0 = new ArrayList<>();
+    JSONArray niz0;
     private static final String TAG = "KomentariAdapter";
     public int duzina = 6;
     public Context context;
@@ -30,7 +32,7 @@ public class KomentariAdapter extends RecyclerView.Adapter<KomentariAdapter.View
 //
 //    }
 
-    public KomentariAdapter(Context context, ArrayList<ArrayList> niz0) {
+    public KomentariAdapter(Context context, JSONArray niz0) {
         this.context = context;
         this.niz0 = niz0;
 
@@ -46,12 +48,18 @@ public class KomentariAdapter extends RecyclerView.Adapter<KomentariAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        String osoba = niz0.get(position).get(1).toString();
+        try {
+            String osoba = niz0.getJSONArray(position).get(1).toString();
 
-        String komentar = niz0.get(position).get(0).toString();
+            String komentar = niz0.getJSONArray(position).get(0).toString();
 
-        holder.osoba.setText(osoba);
-        holder.komentar.setText(komentar);
+            holder.osoba.setText(osoba);
+            holder.komentar.setText(komentar);
+        }
+        catch (Exception e) {
+
+        }
+
 
 
 
@@ -60,7 +68,7 @@ public class KomentariAdapter extends RecyclerView.Adapter<KomentariAdapter.View
 
     @Override
     public int getItemCount() {
-        return niz0.size();
+        return niz0.length();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

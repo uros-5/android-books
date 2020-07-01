@@ -21,6 +21,8 @@ import com.example.knjizara.viewmodel.KorisnikSP;
 import com.example.knjizara.viewmodel.ListenerMojeKnjige;
 import com.example.knjizara.viewmodel.MojeKnjigeSP;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 
@@ -32,7 +34,7 @@ public class Tab2 extends Fragment {
     public MojeKnjigeRVAdapter adapter;
     Klijent klijent;
     KorisnikSP korisnikSP;
-    ArrayList<ArrayList> lista;
+    JSONArray lista;
     String userId;
 
     @Override

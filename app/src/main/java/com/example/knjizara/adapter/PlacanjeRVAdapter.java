@@ -13,17 +13,20 @@ import com.example.knjizara.Klijent;
 import com.example.knjizara.R;
 import com.example.knjizara.model.Knjiga;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class PlacanjeRVAdapter extends RecyclerView.Adapter<PlacanjeRVAdapter.ViewHolder> {
-    ArrayList<String> niz0 = new ArrayList<>();
-    ArrayList<ArrayList> knjiga;
+    ArrayList<String>  niz0;
+    JSONArray knjiga;
     Klijent klijent;
 
 
     private static final String TAG = "PlacanjeRVAdapter";
 
-    public PlacanjeRVAdapter(Context context, ArrayList<String> niz0) {
+    public PlacanjeRVAdapter(Context context, ArrayList<String>  niz0) {
         this.niz0 = niz0;
 
     }
@@ -41,14 +44,21 @@ public class PlacanjeRVAdapter extends RecyclerView.Adapter<PlacanjeRVAdapter.Vi
 
         klijent = new Klijent();
 
-        knjiga = klijent.sendM("id "+niz0.get(position).toString());
+        try {
+            knjiga = klijent.sendM("id "+niz0.get(position).toString());
 
-        String naslov = knjiga.get(0).get(1).toString();
+            String naslov = knjiga.getJSONArray(position).get(1).toString();
 
-        String cena = knjiga.get(0).get(2).toString();
+            String cena = knjiga.getJSONArray(position).get(3).toString();
 
-        holder.naslov.setText(naslov);
-        holder.cena.setText(cena);
+            holder.naslov.setText(naslov);
+            holder.cena.setText(cena);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
 
 

@@ -11,6 +11,8 @@ import com.example.knjizara.R;
 import com.example.knjizara.adapter.TopLevelRVAdapter;
 import com.example.knjizara.model.Knjiga;
 
+import org.json.JSONArray;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -110,13 +112,13 @@ public class KnjizaraInfo {
         }
         return nizKat;
     }
-    public void initKategorijaRV(ArrayList<ArrayList> niz) {
+    public void initKategorijaRV(JSONArray niz) {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
 
         RecyclerView recyclerView = ((AppCompatActivity) context).findViewById(R.id.kategorijaLista0);
         recyclerView.setLayoutManager(gridLayoutManager);
         TopLevelRVAdapter adapter = new TopLevelRVAdapter(context,niz);
-        adapter.setDuzina(niz.size());
+        adapter.setDuzina(niz.length());
         recyclerView.setAdapter(adapter);
     }
 

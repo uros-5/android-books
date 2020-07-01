@@ -18,6 +18,8 @@ import com.example.knjizara.model.Korisnik;
 import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
@@ -67,15 +69,25 @@ public class LoginActivity extends AppCompatActivity {
         String sifra = ((EditText)findViewById(R.id.password2)).getText().toString();
 
         if(username!="" && sifra!="") {
-            ArrayList<ArrayList> lista = klijent.sendM("getUser " +username+" " +sifra);
+            JSONArray lista = klijent.sendM("getUser " +username+" " +sifra);
             try{
-                String usernameFromDb = lista.get(0).get(0).toString();
-                String id = lista.get(0).get(1).toString();
-                Korisnik korisnik = new Korisnik();
-                korisnik.id = id;
-                korisnikSP.setKorisnik(korisnik);
-                onRestart();
-                Toast.makeText(this,"Dobrodosli.",Toast.LENGTH_LONG).show();
+                String provera = lista.getJSONArray(0).get(0).toString();
+
+                if(provera.equals("OK")) {
+                    String id = String.valueOf(Integer.parseInt(lista.getJSONArray(0).get(1).toString()));
+
+                    Korisnik korisnik = new Korisnik();
+                    korisnik.id = id;
+
+                    korisnikSP.setKorisnik(korisnik);
+                    onRestart();
+                    Toast.makeText(this,"Dobrodosli.",Toast.LENGTH_LONG).show();
+                }
+                else {
+
+                    Toast.makeText(this,"Pogresni parametri..",Toast.LENGTH_LONG).show();
+                }
+
 
             }
             catch (Exception e) {

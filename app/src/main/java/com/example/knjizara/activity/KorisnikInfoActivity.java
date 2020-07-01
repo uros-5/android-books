@@ -19,6 +19,8 @@ import com.example.knjizara.model.Korisnik;
 import com.example.knjizara.viewmodel.CurrentTabSP;
 import com.example.knjizara.viewmodel.KorisnikSP;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class KorisnikInfoActivity extends AppCompatActivity {
@@ -88,18 +90,18 @@ public class KorisnikInfoActivity extends AppCompatActivity {
             }
         }
         if(toAdd == true) {
-            String primer = String.format("INSERT INTO osoba (username,email,sifra,ime,prezime,ulicaIBroj,brojPoste,grad) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
-                    username,email,password,ime,prezime,ulicaIBroj,brojPoste,grad);
-            ArrayList<ArrayList> lista = klijent.sendM("countOsoba");
-            String id = lista.get(0).get(0).toString();
-            String primer2 = String.format("INSERT INTO korisnici (osoba_id) VALUES (%s);",id);
-            klijent.sendM("addUser "+primer+" " + primer2);
-
-            Korisnik korisnik = new Korisnik(ime,prezime,ulicaIBroj,email,kartica,brojPoste,grad,id);
-            korisnikSP.setKorisnik(korisnik);
-
-            Toast.makeText(this,"Uspesno ste se registrovali.",Toast.LENGTH_LONG).show();
-            finish();
+//            String primer = String.format("INSERT INTO osoba (username,email,sifra,ime,prezime,ulicaIBroj,brojPoste,grad) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
+//                    username,email,password,ime,prezime,ulicaIBroj,brojPoste,grad);
+//            JSONArray lista = klijent.sendM("countOsoba");
+//            String id = lista.get(0).get(0).toString();
+//            String primer2 = String.format("INSERT INTO korisnici (osoba_id) VALUES (%s);",id);
+//            klijent.sendM("addUser "+primer+" " + primer2);
+//
+//            Korisnik korisnik = new Korisnik(ime,prezime,ulicaIBroj,email,kartica,brojPoste,grad,id);
+//            korisnikSP.setKorisnik(korisnik);
+//
+//            Toast.makeText(this,"Uspesno ste se registrovali.",Toast.LENGTH_LONG).show();
+//            finish();
 
 //            Intent intent = new Intent(KorisnikInfoActivity.this,PlacanjeActivity.class);
 //            startActivity(intent);

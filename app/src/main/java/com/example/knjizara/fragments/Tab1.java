@@ -24,6 +24,8 @@ import com.example.knjizara.viewmodel.KnjizaraInfo;
 import com.example.knjizara.viewmodel.KorisnikSP;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -34,9 +36,9 @@ public class Tab1 extends Fragment {
     //klijent
     Klijent klijent;
     //mysql data
-    ArrayList<ArrayList> niz00 = new ArrayList<>();
-    ArrayList<ArrayList> niz11 = new ArrayList<>();
-    ArrayList<ArrayList> hronoloskaLista2 = new ArrayList<>();
+    JSONArray niz00 ;
+    JSONArray niz11;
+    JSONArray hronoloskaLista2 ;
 
     Gson gson;
     SharedPreferences pref;
@@ -135,7 +137,7 @@ public class Tab1 extends Fragment {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(gridLayoutManager);
             TopLevelRVAdapter adapter = new TopLevelRVAdapter(getActivity(),hronoloskaLista2);
-            adapter.setDuzina(hronoloskaLista2.size());
+            adapter.setDuzina(hronoloskaLista2.length());
             recyclerView.setAdapter(adapter);
             recyclerView.setNestedScrollingEnabled(false);
         }

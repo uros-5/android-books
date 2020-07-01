@@ -1,5 +1,9 @@
 package com.example.knjizara;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -22,7 +26,7 @@ public class Klijent {
     BufferedReader br;
     InputStreamReader isr;
     DataOutputStream dos;
-    ArrayList<ArrayList> lista;
+    JSONArray lista;
     boolean provera = false;
 
     public boolean testServer() {
@@ -87,9 +91,16 @@ public class Klijent {
                 @Override
                 public void run() {
                     try {
-                        ObjectInputStream is = new ObjectInputStream(s.getInputStream());
+                        isr = new InputStreamReader(s.getInputStream());
+                        br = new BufferedReader(isr);
+                        String message = br.readLine();
 
-                        lista = (ArrayList) is.readObject();
+
+                        JSONObject jObject = new JSONObject(message);
+                        JSONArray jArray = jObject.getJSONArray("lista");
+                        printJSONArray(jArray);
+
+                        lista = jArray.getJSONArray(0);
 
 
                         zatvoriSocket();
@@ -108,7 +119,21 @@ public class Klijent {
         }
 
     }
-    public ArrayList<ArrayList> sendM(String poruka) {
+
+    public void printJSONArray(JSONArray jArray) {
+
+
+//        try {
+//            System.out.println(jArray.getJSONArray(0));
+//            for(int j=0;j<jArray.getJSONArray(0).length();j++) {
+////                    System.out.println(jArray.getJSONArray(0).get(j));
+//            }
+//        } catch (JSONException ex) {
+//            Logger.getLogger(Klijent.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+
+    public JSONArray sendM(String poruka) {
         try {
             
             if(poruka.equals("test")) {
@@ -156,7 +181,7 @@ public class Klijent {
 
                 setLista();
 
-//                zatvoriSocket();
+                zatvoriSocket();
 
                 return lista;
             }
@@ -262,7 +287,7 @@ public class Klijent {
     }
     public Socket poveziSaServerom() {
         try {
-            s = new Socket("192.168.1.4",7800);
+            s = new Socket("192.168.1.4",34300);
             return s;
         } catch (IOException ex) {
             return null;

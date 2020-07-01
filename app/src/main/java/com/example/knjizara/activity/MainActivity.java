@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRestart() {
-        System.out.println("nesto "+currentTabSP.getCT());
         super.onRestart();
         if(currentTabSP.getCT()==2) {
             Handler handlerUpdate = new Handler();

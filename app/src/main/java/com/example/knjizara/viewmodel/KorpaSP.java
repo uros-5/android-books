@@ -17,6 +17,8 @@ import com.example.knjizara.model.Knjiga;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -89,15 +91,26 @@ public class KorpaSP {
     public double getUkupnaCenaKnjiga() {
         ArrayList<String> korpa = getKorpa();
         double ukupno = 0.00;
-        for (String knjiga:korpa) {
-            ArrayList<ArrayList> knjigaInfo = klijent.sendM("id "+knjiga);
-            String cena = knjigaInfo.get(0).get(2).toString();
-            if(!cena.startsWith("Besplatno")) {
-                ukupno+= Double.parseDouble(cena);
+
+        try {
+            for (int i = 0; i<korpa.size();i++) {
+                JSONArray knjigaInfo = klijent.sendM("id "+korpa.get(i).toString());
+                String cena = String.valueOf(knjigaInfo.getJSONArray(0).get(3).toString());
+                if(!cena.startsWith("0")) {
+                    ukupno+= Double.parseDouble(cena);
+                }
             }
+            DecimalFormat df = new DecimalFormat("0.00");
+            return Double.parseDouble(df.format(ukupno));
         }
-        DecimalFormat df = new DecimalFormat("0.00");
-        return Double.parseDouble(df.format(ukupno));
+        catch (Exception e) {
+
+        }
+        return 0.0;
+
+
+
+
     }
 
     public void setAray (ArrayList<String> niz) {
