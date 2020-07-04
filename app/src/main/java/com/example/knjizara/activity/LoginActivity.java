@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onRegister(View view) {
         KorisnikInfoActivity korisnikInfoActivity = new KorisnikInfoActivity();
         Intent intent = new Intent(LoginActivity.this,KorisnikInfoActivity.class);
+        intent.putExtra("success","home");
         startActivity(intent);
         Animatoo.animateDiagonal(this);
     }

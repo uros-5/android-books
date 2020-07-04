@@ -166,7 +166,9 @@ public class PlacanjeActivity extends AppCompatActivity {
                 else {
 //                    onPause();
                     Intent intent = new Intent(this, KorisnikInfoActivity.class);
+                    intent.putExtra("success","placanje");
                     startActivity(intent);
+
                     Animatoo.animateDiagonal(this);
                     korisnikSP.setBack(false);
                     break;

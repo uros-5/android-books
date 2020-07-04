@@ -35,6 +35,8 @@ public class KorisnikInfoActivity extends AppCompatActivity {
 
     CurrentTabSP currentTabSP;
 
+    String success;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class KorisnikInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_korisnik_info);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_knjiga);
         setSupportActionBar(toolbar);
+
+        success = (String)getIntent().getExtras().get("success");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -90,22 +94,53 @@ public class KorisnikInfoActivity extends AppCompatActivity {
             }
         }
         if(toAdd == true) {
+//            reg username email sifra ime prezime ulicaIBroj brojPoste grad
+            String reg = String.format("reg (%s) (%s) (%s) (%s) (%s) (%s) (%s) (%s)",username,email,password,ime,prezime,ulicaIBroj,brojPoste,grad);
+            JSONArray lista = klijent.sendM(reg);
+            try{
+                String provera = lista.getJSONArray(0).get(0).toString();
+                if(provera.equals("OK")) {
+                    String id = String.valueOf(Integer.parseInt(lista.getJSONArray(0).get(1).toString()));
+
+                    Korisnik korisnik = new Korisnik();
+                    korisnik.id = id;
+
+                    korisnikSP.setKorisnik(korisnik);
+
+                    Toast.makeText(this,"Uspesno ste se registrovali.",Toast.LENGTH_LONG).show();
+
+                    finish();
+
+                    if(success.equals("placanje")) {
+                        Intent intent = new Intent(KorisnikInfoActivity.this,PlacanjeActivity.class);
+                        startActivity(intent);
+                        Animatoo.animateSlideUp(this);
+                    }
+
+
+
+                }
+                else {
+
+                    Toast.makeText(this,"Pogresni parametri..",Toast.LENGTH_LONG).show();
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 //            String primer = String.format("INSERT INTO osoba (username,email,sifra,ime,prezime,ulicaIBroj,brojPoste,grad) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
 //                    username,email,password,ime,prezime,ulicaIBroj,brojPoste,grad);
 //            JSONArray lista = klijent.sendM("countOsoba");
 //            String id = lista.get(0).get(0).toString();
 //            String primer2 = String.format("INSERT INTO korisnici (osoba_id) VALUES (%s);",id);
 //            klijent.sendM("addUser "+primer+" " + primer2);
-//
+
 //            Korisnik korisnik = new Korisnik(ime,prezime,ulicaIBroj,email,kartica,brojPoste,grad,id);
 //            korisnikSP.setKorisnik(korisnik);
-//
-//            Toast.makeText(this,"Uspesno ste se registrovali.",Toast.LENGTH_LONG).show();
-//            finish();
 
-//            Intent intent = new Intent(KorisnikInfoActivity.this,PlacanjeActivity.class);
-//            startActivity(intent);
-            Animatoo.animateSlideUp(this);
+
+
+
         }
 
     }

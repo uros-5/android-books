@@ -49,7 +49,7 @@ public class KomentariAdapter extends RecyclerView.Adapter<KomentariAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         try {
-            String osoba = niz0.getJSONArray(position).get(1).toString();
+            String osoba = niz0.getJSONArray(position).get(2).toString();
 
             String komentar = niz0.getJSONArray(position).get(0).toString();
 

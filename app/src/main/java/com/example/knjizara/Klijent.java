@@ -276,6 +276,15 @@ public class Klijent {
 
                 return lista;
             }
+            else if(poruka.startsWith("reg")) {
+                sendM0(poruka);
+
+                setLista();
+
+                zatvoriSocket();
+
+                return lista;
+            }
             
             
         }
